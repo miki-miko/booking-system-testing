@@ -1,0 +1,24 @@
+.filter-container {
+  width: 300px;
+  padding: 5rem 0;
+  margin: 20px;
+  border: 3px solid blueviolet;
+  background-color: pink;
+}
+
+.filter-form {
+  width: 60vw;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(202px, 1fr));
+  grid-row-gap: 2rem;
+  grid-column-gap: 40px;
+}
+.form-group {
+  text-transform: capitalize;
+}
+.form-control {
+  border: 3px solid red;
+  width: 100px;
+  font-size: 1rem;
+}

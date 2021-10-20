@@ -1,19 +1,24 @@
 import {
     FETCH_ALL_TABLES_ERROR,
     FETCH_ALL_TABLES_REQUEST,
-    FETCH_ALL_TABLES_SUCCESS
+    FETCH_ALL_TABLES_SUCCESS,
+    FILTER_TABLE
 } from "./constants";
 
 
 const defaultState = {
     tables: [],
+    tablesFiltered: [],
     error: null,
     loading: false,
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (state = defaultState, action: { type: any; payload: any; }) => {
+
+
     switch(action.type) {
+
         case FETCH_ALL_TABLES_REQUEST:
             return {
                 ...state,
@@ -34,6 +39,13 @@ export default (state = defaultState, action: { type: any; payload: any; }) => {
                 error: action.payload
             }
 
+
+            case FILTER_TABLE:
+                return {
+                    ...state,
+                    tablesFiltered: action.payload,
+                  
+                }
 
         default :
             return state

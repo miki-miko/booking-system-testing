@@ -1,0 +1,29 @@
+* {
+  font-family: Helvetica;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.resetMargin {
+  margin: 0 !important;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px 24px 0px 24px;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.tables-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-top: 30px;
+  padding: 40px;
+  width: 800px;
+  border: #f9e64f 5px solid;
+}

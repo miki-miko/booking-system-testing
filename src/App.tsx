@@ -6,10 +6,13 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllTables } from './store/actions';
 import { RootState } from './store/reduxStore';
+import TableFilters, { tableI } from './components/TableFilter/TableFilter';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
-  const tables = useSelector((state: RootState) => state.tables);
+  const filteredTables: tableI[] = useSelector(
+    (state: RootState) => state.tablesFiltered
+  );
 
   useEffect(() => {
     dispatch(fetchAllTables());
@@ -18,10 +21,12 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <Navbar />
-      <div className={'TablesContainer'}>
-        {tables.map((tableInfo: any) => (
-          <Table table={tableInfo} />
-        ))}
+      <TableFilters />
+      <div className="tables-container">
+        {filteredTables &&
+          filteredTables.map((tableInfo: any, index: any) => (
+            <Table key={index} table={tableInfo} />
+          ))}
       </div>
     </div>
   );

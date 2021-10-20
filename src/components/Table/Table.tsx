@@ -13,7 +13,7 @@ interface tableI {
 const Table: React.FC<tableI> = (tableInfo) => {
   //
   return (
-    <div className="Card">
+    <div className="table-wrapper">
       <p className="table-name">{tableInfo.table.name}</p>
       <p className="table-capacity">
         This table is for {tableInfo.table.capacity} persons
