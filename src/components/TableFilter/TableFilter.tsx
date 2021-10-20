@@ -1,3 +1,4 @@
+import { Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { filterTables } from '../../store/actions';
 
@@ -31,31 +32,52 @@ const TableFilters: React.FC = () => {
   };
 
   return (
-    <section className="filter-container">
-      <h3>Select a table</h3>
-      <form className="filter-form">
-        <div className="form-group">
-          <label htmlFor="type">Table location</label>
-          <select
-            name="type"
-            id="type"
-            placeholder=""
-            onChange={handleChange}
-            className="form-control"
-          >
-            <option value="" disabled selected>
-              Select your location
-            </option>
-            {uniq &&
-              uniq.map((location: string, index: number) => (
-                <option key={index} value={location}>
-                  {location}
-                </option>
-              ))}
-          </select>
-        </div>
-      </form>
-    </section>
+    <Form>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Select a table</Form.Label>
+        <Form.Control
+          onChange={handleChange}
+          as="select"
+          aria-label="Default select example"
+        >
+          <option>Select your table's location</option>
+          {uniq &&
+            uniq.map((location: string, index: number) => (
+              <option key={index} value={location}>
+                {location}
+              </option>
+            ))}
+        </Form.Control>
+      </Form.Group>
+    </Form>
+
+    //   <h3>Select a table</h3>
+    //   <form className="filter-form">
+
+    //     <div className="form-group">
+
+    //       <label htmlFor="type">Table location</label>
+
+    //       <select
+    //         name="type"
+    //         id="type"
+    //         placeholder=""
+    //         onChange={handleChange}
+    //         className="form-control"
+    //       >
+    //         <option value="" disabled selected>
+    //           Select your location
+    //         </option>
+    //         {uniq &&
+    //           uniq.map((location: string, index: number) => (
+    //             <option key={index} value={location}>
+    //               {location}
+    //             </option>
+    //           ))}
+    //       </select>
+    //     </div>
+    //   </form>
+    // </section>
   );
 };
 
