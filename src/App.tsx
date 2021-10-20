@@ -4,7 +4,7 @@ import Table from './components/Table/Table';
 
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllTables } from './store/actions';
+import { fetchAllTables, filterTables } from './store/actions';
 import { RootState } from './store/reduxStore';
 import TableFilters, { tableI } from './components/TableFilter/TableFilter';
 import NavbarCustom from './components/Navbar/Navbar';
