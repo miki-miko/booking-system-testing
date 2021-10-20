@@ -1,0 +1,5 @@
+// chiamate per prendere tutte le starships
+export const FETCH_ALL_TABLES_REQUEST = 'FETCH_ALL_TABLES_REQUEST'
+export const FETCH_ALL_TABLES_SUCCESS = 'FETCH_ALL_TABLES_SUCCESS'
+export const FETCH_ALL_TABLES_ERROR = 'FETCH_ALL_TABLES_ERROR'
+
