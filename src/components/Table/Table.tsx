@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 
 interface tableI {
   id: number;
@@ -8,16 +8,16 @@ interface tableI {
   location: string;
 }
 
-const Table: React.FC<tableI> = (table) => {
+const Table: React.FC<tableI> = (tableInfo) => {
   //
   return (
     <div className="Card">
-      <p className="table-name">{table.name}</p>
+      <p className="table-name">{tableInfo.name}</p>
       <p className="table-capacity">
-        This table is for {table.capacity} persons
+        This table is for {tableInfo.capacity} persons
       </p>
-      <p className="table-availabilty"> {table.isAvailable}</p>
-      <p className="table-location">Location: {table.location}</p>
+      <p className="table-availabilty"> {tableInfo.isAvailable}</p>
+      <p className="table-location">Location: {tableInfo.location}</p>
     </div>
   );
 };

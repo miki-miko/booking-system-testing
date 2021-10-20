@@ -10,7 +10,7 @@ export const fetchAllTables = () => {
     return async (dispatch: (arg0: { type: string; payload?: unknown; }) => void) => {
         dispatch({type: FETCH_ALL_TABLES_REQUEST})
         try {
-            const {data: tables} = await axios.get('http://localhost:3000/tables')
+            const {data: tables} = await axios.get('http://localhost:5000/tables')
             dispatch({type: FETCH_ALL_TABLES_SUCCESS, payload: tables})
         }
         catch(e) {
