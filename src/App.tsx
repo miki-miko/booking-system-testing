@@ -1,8 +1,8 @@
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
-import Table from './components/Navbar/Navbar';
+import Table from './components/Table/Table';
 
-import { Key, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllTables } from './store/actions';
 import { RootState } from './store/reduxStore';
@@ -19,8 +19,8 @@ const App: React.FC = () => {
     <div className="App">
       <Navbar />
       <div className={'TablesContainer'}>
-        {tables.map((tableInfo: { id: Key | null | undefined }) => (
-          <Table table={tableInfo} key={tableInfo.id} />
+        {tables.map((tableInfo: any) => (
+          <Table table={tableInfo} />
         ))}
       </div>
     </div>
