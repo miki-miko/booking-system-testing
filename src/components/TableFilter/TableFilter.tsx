@@ -50,34 +50,6 @@ const TableFilters: React.FC = () => {
         </Form.Control>
       </Form.Group>
     </Form>
-
-    //   <h3>Select a table</h3>
-    //   <form className="filter-form">
-
-    //     <div className="form-group">
-
-    //       <label htmlFor="type">Table location</label>
-
-    //       <select
-    //         name="type"
-    //         id="type"
-    //         placeholder=""
-    //         onChange={handleChange}
-    //         className="form-control"
-    //       >
-    //         <option value="" disabled selected>
-    //           Select your location
-    //         </option>
-    //         {uniq &&
-    //           uniq.map((location: string, index: number) => (
-    //             <option key={index} value={location}>
-    //               {location}
-    //             </option>
-    //           ))}
-    //       </select>
-    //     </div>
-    //   </form>
-    // </section>
   );
 };
 
