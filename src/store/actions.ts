@@ -47,15 +47,17 @@ export const addTable = (table: any) => {
 }
 
 export const deleteTable = (id: number) => {
-    return async (dispatch: (arg0: { type: string; payload?: any; }) => void) => {
+    return async (dispatch: (arg0: { type: string; payload?: unknown; }) => void) => {
         dispatch({type: DELETE_TABLE_REQUEST})
         try {
-            const { status } = await axios.delete(`http://localhost:5000/tables/${id}`)
+
+            const {status} = await axios.delete(`http://localhost:5000/tables/${id}`)
             if ( status === 200) {
                 dispatch({type: DELETE_TABLE_SUCCESS, payload: id})
-            } else {
+              } else {
                 throw new Error ('Delete Failed')
-            }
+              }
+           
         } catch (e) {
             dispatch({type:DELETE_TABLE_ERROR, payload: e })
         }

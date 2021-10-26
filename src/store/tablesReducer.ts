@@ -74,7 +74,7 @@ const tablesReducer = (state = defaultState, action: { type: any; payload: any; 
                 return {
                     ...state,
                     loading: false,
-                    tables: state.tables.filter((table: { id: any; }) => table.id !== action.payload)
+                    tables: state.tables.filter((table: { id: number; }) => table.id !== action.payload)
                 }
 
                 case DISCARD_ERROR:

@@ -5,13 +5,13 @@ import { useDispatch } from 'react-redux';
 import { tableI } from '../../Interfaces';
 import { deleteTable } from '../../store/actions';
 
-const Table: React.FC<tableI> = ({ table }) => {
+const Table: React.FC<any> = ({ table }) => {
   const [open, setOpen] = useState(false);
 
   const dispatch = useDispatch();
 
-  const deletingTable = async (table: { table: { id: any } }) => {
-    dispatch(deleteTable(table.table.id));
+  const deletingTable = async () => {
+    dispatch(deleteTable(table.id));
   };
 
   return (
@@ -33,7 +33,7 @@ const Table: React.FC<tableI> = ({ table }) => {
           <Button variant="primary" onClick={() => setOpen(true)}>
             Details
           </Button>
-          <Button variant="danger" onClick={() => deletingTable}>
+          <Button variant="danger" onClick={deletingTable}>
             Delete
           </Button>
         </div>

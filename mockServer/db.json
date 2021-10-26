@@ -31,15 +31,6 @@
       "capacity": 6,
       "isAvailable": true,
       "location": "Inside"
-    },
-
-    {
-      "id": 5,
-      "name": "Table 5",
-      "img": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/edc-web-tour-natasha-bardaran-2-1607305891.jpg?crop=1.00xw:0.928xh;0,0.0723xh&resize=480:*",
-      "capacity": 7,
-      "isAvailable": true,
-      "location": "Patio"
     }
   ]
 }

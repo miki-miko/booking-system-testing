@@ -19,7 +19,6 @@ const TableForm: React.FC<TableFormProps> = ({
   const checkAndAddStarship = async (e: any) => {
     setValidate(true);
     try {
-      console.log('sono qui?');
       await addPost(e);
       setValidate(false);
       handleClose();
@@ -73,7 +72,7 @@ const TableForm: React.FC<TableFormProps> = ({
                   required
                   onChange={onInputChange}
                   type="text"
-                  name="image"
+                  name="imageUrl"
                   placeholder="Enter the image link"
                 />
                 <Form.Control.Feedback type="invalid">

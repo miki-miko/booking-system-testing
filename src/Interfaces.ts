@@ -1,23 +1,22 @@
 
 export interface tableI {
-  table: {
+  
     id: number;
     name: string;
     img: string;
     capacity: number;
     isAvailable: boolean;
     location: string;
-  }
+ 
   }
 
 
 export interface newTableI {
-  table: {
     name: string;
     location: string;
     imageUrl: string;
-    capacity: number;
-  }
+    capacity: string;
+  
   }
   
 

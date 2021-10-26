@@ -13,4 +13,4 @@ export const defaultStore = {
 export type RootState = ReturnType<typeof tablesReducer>
 
 
-export const store = createStore(tablesReducer, defaultStore, compose(applyMiddleware(thunk), (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__()))
+export const store = createStore(tablesReducer, defaultStore, compose(applyMiddleware(thunk), (window as any).__REDUX_DEVTOOLS_EXTENSION__ ? (window as any).__REDUX_DEVTOOLS_EXTENSION__() : (f: any) => f))

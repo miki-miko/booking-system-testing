@@ -46,10 +46,10 @@ function App() {
   };
 
   const checkForm = () =>
-    newTable?.table.name &&
-    newTable?.table.location &&
-    newTable?.table.imageUrl &&
-    newTable?.table.capacity >= 0;
+    newTable?.name &&
+    newTable?.location &&
+    newTable?.imageUrl &&
+    Number.parseInt(newTable?.capacity) >= 0;
 
   const onInputChange = (e: any) => {
     setNewTable((table: any) => ({
