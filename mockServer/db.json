@@ -1,35 +1,45 @@
 {
-    "tables": [
-      {"id": 1,
-        "name": "Table 1",
-        "capacity": 5,
-        "isAvailable": true,
-        "location": "Bar"
-      },
-      {"id": 2,
-        "name": "Table 2",
-        "capacity": 5,
-        "isAvailable": true,
-        "location": "Patio"
-      },
-      {"id": 3,
-        "name": "Table 3",
-        "capacity": 5,
-        "isAvailable": true,
-        "location": "Bar"
-      },
-      {"id": 4,
-        "name": "Table 4",
-        "capacity": 6,
-        "isAvailable": true,
-        "location": "Inside"
-      },
-      {"id": 5,
-        "name": "Table 5",
-        "capacity": 7,
-        "isAvailable": true,
-        "location": "Patio"
-      }
-     
-    ]
-  }
+  "tables": [
+    {
+      "id": 1,
+      "name": "Table 1",
+      "img": "https://images.pexels.com/photos/1283219/pexels-photo-1283219.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
+      "capacity": 5,
+      "isAvailable": true,
+      "location": "Bar"
+    },
+    {
+      "id": 2,
+      "name": "Table 2",
+      "img": "https://images.pexels.com/photos/238377/pexels-photo-238377.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
+      "capacity": 5,
+      "isAvailable": true,
+      "location": "Patio"
+    },
+    {
+      "id": 3,
+      "name": "Table 3",
+      "img": "https://images.pexels.com/photos/941864/pexels-photo-941864.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
+      "capacity": 5,
+      "isAvailable": true,
+      "location": "Bar"
+    },
+    {
+      "id": 4,
+      "name": "Table 4",
+      "img": "https://images.pexels.com/photos/4913313/pexels-photo-4913313.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
+      "capacity": 6,
+      "isAvailable": true,
+      "location": "Inside"
+    },
+
+    {
+      "id": 5,
+      "name": "Table 5",
+      "img": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/edc-web-tour-natasha-bardaran-2-1607305891.jpg?crop=1.00xw:0.928xh;0,0.0723xh&resize=480:*",
+      "capacity": 7,
+      "isAvailable": true,
+      "location": "Patio"
+    }
+  ]
+}

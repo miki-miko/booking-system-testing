@@ -18,28 +18,23 @@ const TableFilters: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const locations: string[] = tables.map((table) => table.location);
-
-  const uniq = [...new Set(locations)];
-
   const handleChange = (event: any) => {
     const filter: string = event.target.value;
 
     const filteredArr = tables.filter((table) => table.location === filter);
-    // console.log(filteredArr);
 
     dispatch(filterTables(filteredArr));
   };
+
+  const locations: string[] = tables.map((table) => table.location);
+
+  const uniq = [...new Set(locations)];
 
   return (
     <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Select a table</Form.Label>
-        <Form.Control
-          onChange={handleChange}
-          as="select"
-          aria-label="Default select example"
-        >
+        <Form.Control onChange={handleChange} as="select" aria-label="">
           <option>Select your table's location</option>
           {uniq &&
             uniq.map((location: string, index: number) => (

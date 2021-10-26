@@ -4,7 +4,14 @@ import {
     FETCH_ALL_TABLES_ERROR,
     FETCH_ALL_TABLES_REQUEST,
     FETCH_ALL_TABLES_SUCCESS,
-    FILTER_TABLE
+    DELETE_TABLE_ERROR,
+    DELETE_TABLE_REQUEST,
+    DELETE_TABLE_SUCCESS,
+    ADD_TABLE_ERROR,
+    ADD_TABLE_REQUEST,
+    ADD_TABLE_SUCCESS,
+    FILTER_TABLE,
+    DISCARD_ERROR,
 } from "./constants";
 
 export const fetchAllTables = () => {
@@ -25,3 +32,37 @@ export const filterTables = (filteredTable: tableI[]) => {
     dispatch({type: FILTER_TABLE, payload: filteredTable})
 
 }
+
+
+export const addTable = (table: any) => {
+    return async (dispatch: any) => {
+        dispatch({type: ADD_TABLE_REQUEST})
+        try {
+            const { data } = await axios.post('http://localhost:5000/tables', table)
+            dispatch({type: ADD_TABLE_SUCCESS, payload: data})
+        } catch (e) {
+            dispatch({type:ADD_TABLE_ERROR, payload: e })
+        }
+    }
+}
+
+export const deleteTable = (id: number) => {
+    return async (dispatch: (arg0: { type: string; payload?: any; }) => void) => {
+        dispatch({type: DELETE_TABLE_REQUEST})
+        try {
+            const { status } = await axios.delete(`http://localhost:5000/tables/${id}`)
+            if ( status === 200) {
+                dispatch({type: DELETE_TABLE_SUCCESS, payload: id})
+            } else {
+                throw new Error ('Delete Failed')
+            }
+        } catch (e) {
+            dispatch({type:DELETE_TABLE_ERROR, payload: e })
+        }
+    }
+}
+
+
+export const discardError = () => ({
+    type: DISCARD_ERROR,
+})

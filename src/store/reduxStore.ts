@@ -3,7 +3,7 @@ import thunk from 'redux-thunk'
 
 import tablesReducer from './tablesReducer'
 
-const defaultStore = {
+export const defaultStore = {
     tables: [],
     tablesFiltered: [],
     error: null,

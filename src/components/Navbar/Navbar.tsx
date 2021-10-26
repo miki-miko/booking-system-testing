@@ -10,7 +10,7 @@ import { Container, Navbar } from 'react-bootstrap';
 
 const NavbarCustom = () => {
   return (
-    <Navbar bg="dark" variant="dark">
+    <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
         <Navbar.Brand>Restaurant Booking</Navbar.Brand>
       </Container>

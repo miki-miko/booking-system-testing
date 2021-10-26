@@ -1,26 +1,49 @@
-import React from 'react';
+import { Button, Card } from 'react-bootstrap';
+import { useState } from 'react';
+import TableCardDetail from '../TableCardDetails/TableCardDetails';
+import { useDispatch } from 'react-redux';
+import { tableI } from '../../Interfaces';
+import { deleteTable } from '../../store/actions';
 
-interface tableI {
-  table: {
-    id: number;
-    name: string;
-    capacity: number;
-    isAvailable: boolean;
-    location: string;
+const Table: React.FC<tableI> = ({ table }) => {
+  const [open, setOpen] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const deletingTable = async (table: { table: { id: any } }) => {
+    dispatch(deleteTable(table.table.id));
   };
-}
 
-const Table: React.FC<tableI> = (tableInfo) => {
-  //
   return (
-    <div className="table-wrapper">
-      <p className="table-name">{tableInfo.table.name}</p>
-      <p className="table-capacity">
-        This table is for {tableInfo.table.capacity} persons
-      </p>
-      <p className="table-availabilty"> {tableInfo.table.isAvailable}</p>
-      <p className="table-location">Location: {tableInfo.table.location}</p>
-    </div>
+    <Card className={'Card'}>
+      <Card.Img
+        style={{ height: 150, objectFit: 'cover' }}
+        variant="top"
+        src={table.img}
+      />
+      <Card.Body>
+        <Card.Title>{table.name}</Card.Title>
+        <Card.Text style={{ minHeight: 50 }}>
+          This table is for {table.capacity} persons
+        </Card.Text>
+        <Card.Text style={{ minHeight: 50 }}>
+          Location: {table.location}
+        </Card.Text>
+        <div>
+          <Button variant="primary" onClick={() => setOpen(true)}>
+            Details
+          </Button>
+          <Button variant="danger" onClick={() => deletingTable}>
+            Delete
+          </Button>
+        </div>
+      </Card.Body>
+      <TableCardDetail
+        table={table}
+        show={open}
+        handleClose={() => setOpen(false)}
+      />
+    </Card>
   );
 };
 
