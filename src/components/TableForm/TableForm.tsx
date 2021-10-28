@@ -41,6 +41,7 @@ const TableForm: React.FC<TableFormProps> = ({
                 <Form.Control
                   required
                   onChange={onInputChange}
+                  data-testid="table-name"
                   name="name"
                   type="text"
                   placeholder="Enter a table name"
@@ -56,6 +57,7 @@ const TableForm: React.FC<TableFormProps> = ({
                 <Form.Control
                   required
                   onChange={onInputChange}
+                  data-testid="table-location"
                   type="text"
                   name="location"
                   placeholder="Enter the location name"
@@ -71,6 +73,7 @@ const TableForm: React.FC<TableFormProps> = ({
                 <Form.Control
                   required
                   onChange={onInputChange}
+                  data-testid="table-imageUrl"
                   type="text"
                   name="imageUrl"
                   placeholder="Enter the image link"
@@ -87,6 +90,7 @@ const TableForm: React.FC<TableFormProps> = ({
                 <Form.Control
                   required
                   onChange={onInputChange}
+                  data-testid="table-capacity"
                   type="number"
                   name="capacity"
                   min={0}

@@ -1,40 +1,46 @@
-import { render, screen, fireEvent, within } from '../../testUtils';
-
+import { render, screen, fireEvent } from '../../testUtils';
+import Table from '../Table/Table';
 import TableCardDetails from './TableCardDetails';
 
-test('testing a click event', () => {
+test('should close the Details dialog modal', () => {
   // Arrange
 
-  // Act
   render(
-    <TableCardDetails
-      show={false}
-      handleClose={function (): void {
-        throw new Error('Function not implemented.');
-      }}
+    <Table
       table={{
         id: 0,
-        name: '',
+        name: 'Tavolo 96',
+        img: 'https://images.pexels.com/photos/238377/pexels-photo-238377.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
         capacity: 0,
         isAvailable: false,
-        location: '',
+        location: 'Patio',
       }}
-    />
+    >
+      <TableCardDetails
+        show={false}
+        handleClose={function (): void {
+          throw new Error('Function not implemented.');
+        }}
+        table={{
+          id: 0,
+          name: 'Tavolo 96',
+          capacity: 0,
+          isAvailable: false,
+          location: 'Patio',
+        }}
+      />
+    </Table>
   );
 
   // Act
-  const detailButton = screen.getByRole('button', { name: /Details/i });
 
-  expect(screen.getByRole('button', { name: /Details/i })).toBeInTheDocument();
+  const openDetailButton = screen.getByRole('button', { name: 'Details' });
 
-  fireEvent.click(detailButton);
+  expect(openDetailButton).toBeInTheDocument();
 
-  const dialog = screen.getByRole('dialog');
+  fireEvent.click(openDetailButton);
 
-  expect(within(dialog).getByText(/location: Bar/i)).toBeInTheDocument();
+  const closeButton = screen.getByLabelText('Close');
 
-  // fireEvent.click(detailButton);
-
-  // // Assert
-  // expect(handleOpen).toHaveBeenCalledTimes(1);
+  expect(closeButton).toBeInTheDocument();
 });

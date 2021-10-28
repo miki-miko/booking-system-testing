@@ -11,6 +11,7 @@ const Table: React.FC<any> = ({ table }) => {
   const dispatch = useDispatch();
 
   const deletingTable = async () => {
+    console.log('isFiring?');
     dispatch(deleteTable(table.id));
   };
 
@@ -33,7 +34,11 @@ const Table: React.FC<any> = ({ table }) => {
           <Button variant="primary" onClick={() => setOpen(true)}>
             Details
           </Button>
-          <Button variant="danger" onClick={deletingTable}>
+          <Button
+            data-testid="delete-button"
+            variant="danger"
+            onClick={deletingTable}
+          >
             Delete
           </Button>
         </div>

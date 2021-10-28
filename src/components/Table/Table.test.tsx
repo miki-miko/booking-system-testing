@@ -1,38 +1,66 @@
-import { render, screen, fireEvent, within } from '../../testUtils';
+import { render, screen, fireEvent } from '../../testUtils';
 
 import Table from './Table';
 
-test('testing a click event', () => {
-  // Arrange
-  const handleOpen = jest.fn();
+describe('Table', () => {
+  test('should open the Table details modal', () => {
+    // Arrange
+    const openFunc = jest.fn();
 
-  // Act
-  render(
-    <Table
-      table={{
-        id: 0,
-        name: '',
-        img: '',
-        capacity: 0,
-        isAvailable: false,
-        location: '',
-      }}
-    />
-  );
+    render(
+      <Table
+        table={{
+          id: 0,
+          name: 'Tavolo 96',
+          img: 'https://images.pexels.com/photos/238377/pexels-photo-238377.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
+          capacity: 0,
+          isAvailable: false,
+          location: 'Patio',
+        }}
+        onClick={openFunc}
+      />
+    );
 
-  // Act
-  const detailButton = screen.getByRole('button', { name: /Details/i });
+    // Act
+    const detailButton = screen.getByRole('button', { name: 'Details' });
 
-  expect(screen.getByRole('button', { name: /Details/i })).toBeInTheDocument();
+    // Assert
+    expect(detailButton).toBeInTheDocument();
 
-  fireEvent.click(detailButton);
+    fireEvent.click(detailButton);
 
-  const dialog = screen.getByRole('dialog');
+    const closeButton = screen.getByRole('button', { name: /close/i });
+    // Assert
+    expect(closeButton).toBeInTheDocument();
+  });
 
-  expect(within(dialog).getByText(/location: Bar/i)).toBeInTheDocument();
+  test('should delete a Table, testing a click event', () => {
+    // Arrange
 
-  // fireEvent.click(detailButton);
+    const deleteFunc = jest.fn();
 
-  // // Assert
-  // expect(handleOpen).toHaveBeenCalledTimes(1);
+    const { container } = render(
+      <Table
+        table={{
+          id: 0,
+          name: '',
+          img: '',
+          capacity: 0,
+          isAvailable: false,
+          location: '',
+        }}
+        onClick={deleteFunc}
+      />
+    );
+
+    const logSpy = jest.spyOn(console, 'log');
+
+    // Act
+    const deleteButton = screen.getByRole('button', { name: /Delete/i });
+
+    fireEvent.click(screen.getByRole('button', { name: /Delete/i }));
+
+    expect(deleteButton).toBeInTheDocument();
+    expect(logSpy).toHaveBeenCalledTimes(1);
+  });
 });

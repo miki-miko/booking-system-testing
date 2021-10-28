@@ -9,7 +9,7 @@ const TableCardDetails: React.FC<tableCardDetailsI> = ({
   return (
     <>
       <Modal centered show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton data-testid="close">
           <Modal.Title> {table.name}</Modal.Title>
         </Modal.Header>
         <Modal.Body

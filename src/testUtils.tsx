@@ -24,7 +24,12 @@ function render(
     store = configureStore({
       reducer: tablesReducer,
       preloadedState: defaultTestRootState,
+      middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+          serializableCheck: false,
+        }),
     }),
+
     ...renderOptions
   } = {}
 ) {

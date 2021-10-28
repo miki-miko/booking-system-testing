@@ -1,23 +1,30 @@
-import { render, screen, fireEvent, within, getByRole } from '../../testUtils';
-import userEvent from '@testing-library/user-event';
+import { render, waitFor, within } from '../../testUtils';
+import user from '@testing-library/user-event';
+
 import TableFilter from '../TableFilter/TableFilter';
 
 describe('TableFilter', () => {
-  test('clicking on Select will show 3 Locations', async () => {
-    // Arrange
-    render(<TableFilter />);
+  test('clicking on Select, then clicking on rendered Option', () => {
+    const { getByRole } = render(<TableFilter />);
 
-    // Act
-    userEvent.click(
-      screen.getByRole('combobox', {
-        name: /select a table/i,
-      })
-    );
+    const select = getByRole('combobox', {
+      name: /form-select/i,
+    });
 
-    await userEvent.click(screen.getByText('Patio'));
+    expect(select).toBeInTheDocument();
 
-    // Assert
+    user.click(select);
 
-    expect(screen.getByLabelText('Select a table')).toBeChecked();
+    waitFor(() => {
+      user.selectOptions(
+        select,
+        within(select).getByRole('option', { name: 'Patio' })
+      );
+    });
+
+    waitFor(() => {
+      const option = getByRole('option', { name: 'Patio' });
+      expect(option).toBeInTheDocument();
+    });
   });
 });

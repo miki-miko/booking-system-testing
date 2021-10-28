@@ -6,7 +6,7 @@ import { Button, Container, Row, Col } from 'react-bootstrap';
 // Components
 import NavbarCustom from './components/Navbar/Navbar';
 import Table from './components/Table/Table';
-import TableFilters, { tableI } from './components/TableFilter/TableFilter';
+import TableFilter, { tableI } from './components/TableFilter/TableFilter';
 import TableForm from './components/TableForm/TableForm';
 
 // React
@@ -18,11 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addTable, fetchAllTables } from './store/actions';
 import { RootState } from './store/reduxStore';
 
-import axios from 'axios';
-
-axios.defaults.headers.post['Content-Type'] = 'application/json';
-
-function App() {
+const App: React.FC = () => {
   const [showFormModal, setShowFormModal] = useState(false);
   const [newTable, setNewTable] = useState<newTableI | null>();
 
@@ -68,19 +64,19 @@ function App() {
   };
 
   return (
-    <div className="App" data-testid="test">
+    <div className="App">
       <NavbarCustom />
       <Container className="main">
         <div className={'PostsContainer'}>
           <Container className="row-container">
             <Row>
-              <TableFilters />
+              <TableFilter />
               <Col className="flex">
                 {filteredTables.length > 0
                   ? filteredTables.map((table: any, index: any) => (
                       <Table key={index} table={table} />
                     ))
-                  : tables &&
+                  : Array.isArray(tables) &&
                     tables.map((table: any, index: any) => (
                       <Table key={index} table={table} />
                     ))}
@@ -89,7 +85,6 @@ function App() {
           </Container>
         </div>
         <TableForm
-          // table={newTable}
           show={showFormModal}
           handleClose={closeForm}
           onInputChange={onInputChange}
@@ -107,6 +102,6 @@ function App() {
       </Container>
     </div>
   );
-}
+};
 
 export default App;

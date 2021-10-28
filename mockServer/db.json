@@ -31,6 +31,14 @@
       "capacity": 6,
       "isAvailable": true,
       "location": "Inside"
+    },
+    {
+      "id": 5,
+      "name": "Table 5",
+      "img": "https://images.pexels.com/photos/271815/pexels-photo-271815.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
+      "capacity": 9,
+      "isAvailable": true,
+      "location": "Patio"
     }
   ]
 }

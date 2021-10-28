@@ -1,4 +1,4 @@
-import axios from 'axios'
+import  axios from 'axios';
 import { tableI } from '../components/TableFilter/TableFilter';
 import {
     FETCH_ALL_TABLES_ERROR,
@@ -14,12 +14,16 @@ import {
     DISCARD_ERROR,
 } from "./constants";
 
+
+export const fetchPosts = () => axios.get('http://localhost:5000/tables');
+
+
 export const fetchAllTables = () => {
     return async (dispatch: (arg0: { type: string; payload?: unknown; }) => void) => {
         dispatch({type: FETCH_ALL_TABLES_REQUEST})
         try {
-            const {data: tables} = await axios.get('http://localhost:5000/tables')
-            dispatch({type: FETCH_ALL_TABLES_SUCCESS, payload: tables})
+         const {data} =  await fetchPosts()
+            dispatch({type: FETCH_ALL_TABLES_SUCCESS, payload: data})
         }
         catch(e) {
             dispatch({type:FETCH_ALL_TABLES_ERROR, payload: e })
