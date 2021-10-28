@@ -41,13 +41,14 @@ const TableForm: React.FC<TableFormProps> = ({
                 <Form.Control
                   required
                   onChange={onInputChange}
-                  data-testid="table-name"
                   name="name"
                   type="text"
                   placeholder="Enter a table name"
+                  aria-invalid="true"
+                  aria-errormessage="table-name"
                 />
-                <Form.Control.Feedback type="invalid">
-                  Please provide a valid table name.
+                <Form.Control.Feedback id="table-name" type="invalid">
+                  Please provide a valid table name
                 </Form.Control.Feedback>
               </Col>
             </Form.Group>
@@ -57,13 +58,14 @@ const TableForm: React.FC<TableFormProps> = ({
                 <Form.Control
                   required
                   onChange={onInputChange}
-                  data-testid="table-location"
+                  aria-errormessage="table-location"
                   type="text"
+                  aria-invalid="true"
                   name="location"
                   placeholder="Enter the location name"
                 />
-                <Form.Control.Feedback type="invalid">
-                  Please provide a valid location.
+                <Form.Control.Feedback id="table-location" type="invalid">
+                  Please provide a valid location
                 </Form.Control.Feedback>
               </Col>
             </Form.Group>
@@ -73,13 +75,14 @@ const TableForm: React.FC<TableFormProps> = ({
                 <Form.Control
                   required
                   onChange={onInputChange}
-                  data-testid="table-imageUrl"
+                  aria-invalid="true"
+                  aria-errormessage="table-image"
                   type="text"
                   name="imageUrl"
                   placeholder="Enter the image link"
                 />
-                <Form.Control.Feedback type="invalid">
-                  Please provide a valid image link.
+                <Form.Control.Feedback id="table-image" type="invalid">
+                  Please provide a valid image link
                 </Form.Control.Feedback>
               </Col>
             </Form.Group>
@@ -90,14 +93,15 @@ const TableForm: React.FC<TableFormProps> = ({
                 <Form.Control
                   required
                   onChange={onInputChange}
-                  data-testid="table-capacity"
                   type="number"
+                  aria-invalid="true"
+                  aria-errormessage="table-capacity"
                   name="capacity"
                   min={0}
                   placeholder="Enter the capacity of the table"
                 />
-                <Form.Control.Feedback type="invalid">
-                  Please provide a valid positive number.
+                <Form.Control.Feedback id="table-capacity" type="invalid">
+                  Please provide a valid positive number
                 </Form.Control.Feedback>
               </Col>
             </Form.Group>
