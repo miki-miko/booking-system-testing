@@ -9,12 +9,13 @@ import {
     FETCH_ALL_TABLES_REQUEST,
     FETCH_ALL_TABLES_SUCCESS,
     FILTER_TABLE
-} from "./constants";
+} from "../constants";
 
 
 const defaultState : any = {
     tables: [],
     tablesFiltered: [],
+    bookings: [],
     error: null,
     loading: false,
 }

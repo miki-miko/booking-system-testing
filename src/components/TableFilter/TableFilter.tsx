@@ -1,39 +1,48 @@
 import { Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { filterTables } from '../../store/actions';
+import { tableI } from '../../Interfaces';
 
 import { RootState } from '../../store/reduxStore';
-import './TableFilter.css';
 
-export interface tableI {
-  id: number;
-  name: string;
-  capacity: number;
-  isAvailable: boolean;
-  location: string;
-}
-
-const TableFilters: React.FC = () => {
-  const tables: tableI[] = useSelector((state: RootState) => state.tables);
+const TableFilter: React.FC = () => {
+  const tables: tableI[] = useSelector(
+    (state: RootState) => state.tables.tables
+  );
 
   const dispatch = useDispatch();
 
   const handleChange = (event: any) => {
-    console.log('isFiring?');
+    const locationFilter: string = event.target.value;
+    const capacityFilter: number = event.target.value;
 
-    if (event.target && event.target.value) {
-      const filter: string = event.target.value;
-      const filteredArr = tables.filter((table) => table.location === filter);
+    const filteredArr = tables.filter(
+      (table) => table.location === locationFilter
+    );
 
-      dispatch(filterTables(filteredArr));
-    } else {
-      return null;
-    }
+    console.log(filteredArr);
+
+    dispatch(filterTables(filteredArr));
   };
 
-  const locations: string[] = tables.map((table) => table.location);
+  // const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
 
-  const uniq = [...new Set(locations)];
+  // const memoizedCallback = useCallback(() => {
+  //   doSomething(a, b);
+  // }, [a, b]);
+
+  // const handleCapacity = (event: any) => {
+
+  //   const capacityState = tables.filter(
+  //     (table) => table.capacity >= capacityFilter
+  //   );
+  //   dispatch(filterTables(capacityState));
+  // };
+
+  const locations: string[] = tables.map((table) => table.location);
+  const capacity: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+  const uniqueLocations = [...new Set(locations)];
 
   return (
     <Form>
@@ -42,13 +51,30 @@ const TableFilters: React.FC = () => {
         <Form.Control
           onChange={handleChange}
           as="select"
-          aria-label="form-select"
+          aria-label="form-select-location"
         >
           <option>Select your table's location</option>
-          {uniq &&
-            uniq.map((location: string, index: number) => (
+          {uniqueLocations &&
+            uniqueLocations.map((location: string, index: number) => (
               <option aria-label="location" key={index} value={location}>
                 {location}
+              </option>
+            ))}
+        </Form.Control>
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Select the capacity of your table</Form.Label>
+        <Form.Control
+          onChange={handleChange}
+          as="select"
+          aria-label="form-select-capacity"
+        >
+          <option>Number of persons sitting </option>
+          {capacity &&
+            capacity.map((capacity: number, index: number) => (
+              <option aria-label="capacity" key={index} value={capacity}>
+                {capacity}
               </option>
             ))}
         </Form.Control>
@@ -57,4 +83,4 @@ const TableFilters: React.FC = () => {
   );
 };
 
-export default TableFilters;
+export default TableFilter;

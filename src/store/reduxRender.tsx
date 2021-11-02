@@ -1,13 +1,14 @@
 import { render, RenderOptions, RenderResult } from '@testing-library/react';
 
-import tablesReducer from './tablesReducer';
+import { rootReducer } from './reduxStore';
 import { Provider } from 'react-redux';
 import { ReactElement } from 'react';
 import { RootState } from './reduxStore';
 
-const defaultTestRootState: RootState = {
+const defaultTestRootState: any = {
   tables: [],
   tablesFiltered: [],
+  bookings: [],
   error: null,
   loading: false,
 };
@@ -21,7 +22,7 @@ const customRender = (
   const Wrapper: React.FC = ({ children }) => {
     // Store with state that can be given by props
     const store: any = configureStore({
-      reducer: tablesReducer,
+      reducer: rootReducer,
       preloadedState: state,
     });
 

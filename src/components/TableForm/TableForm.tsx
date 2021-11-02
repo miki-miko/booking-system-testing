@@ -1,12 +1,6 @@
 import { Button, Col, Form, Row, Modal, CloseButton } from 'react-bootstrap';
 import { useState } from 'react';
-
-export interface TableFormProps {
-  show: boolean;
-  handleClose: () => void;
-  onInputChange: any;
-  addPost: any;
-}
+import { TableFormProps } from '../../Interfaces';
 
 const TableForm: React.FC<TableFormProps> = ({
   show,
@@ -16,7 +10,7 @@ const TableForm: React.FC<TableFormProps> = ({
 }) => {
   const [validate, setValidate] = useState(false);
 
-  const checkAndAddStarship = async (e: any) => {
+  const checkAndAddTable = async (e: any) => {
     setValidate(true);
     try {
       await addPost(e);
@@ -107,7 +101,7 @@ const TableForm: React.FC<TableFormProps> = ({
             </Form.Group>
             <br />
             <Col>
-              <Button onClick={checkAndAddStarship} variant="primary">
+              <Button onClick={checkAndAddTable} variant="primary">
                 Submit
               </Button>
             </Col>

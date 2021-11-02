@@ -14,6 +14,11 @@ export const ADD_TABLE_REQUEST = 'ADD_TABLE_REQUEST'
 export const ADD_TABLE_ERROR = 'ADD_TABLE_ERROR'
 export const ADD_TABLE_SUCCESS = 'ADD_TABLE_SUCCESS'
 
+//chiamate per aggiungere un booking
+export const ADD_BOOKING_REQUEST = 'ADD_BOOKING_REQUEST'
+export const ADD_BOOKING_ERROR = 'ADD_BOOKING_ERROR'
+export const ADD_BOOKING_SUCCESS = 'ADD_BOOKING_SUCCESS'
+
 
 export const FILTER_TABLE = 'FILTER_TABLE' 
 

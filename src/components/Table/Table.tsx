@@ -4,6 +4,7 @@ import TableCardDetail from '../TableCardDetails/TableCardDetails';
 import { useDispatch } from 'react-redux';
 import { tableI } from '../../Interfaces';
 import { deleteTable } from '../../store/actions';
+import { Link } from 'react-router-dom';
 
 const Table: React.FC<any> = ({ table }) => {
   const [open, setOpen] = useState(false);
@@ -41,6 +42,11 @@ const Table: React.FC<any> = ({ table }) => {
           >
             Delete
           </Button>
+          <Link to="/booking">
+            <Button data-testid="booking-button" variant="info">
+              Book it!
+            </Button>
+          </Link>
         </div>
       </Card.Body>
       <TableCardDetail

@@ -1,7 +1,16 @@
 import { render } from './testUtils';
 import user from '@testing-library/user-event';
+import renderer from 'react-test-renderer';
 
 import App from './App';
+
+describe('Snapshot testing App', () => {
+  test('snapshot for App component', () => {
+    render(<App />);
+    const tree = renderer.create(<App />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+});
 
 describe('App', () => {
   test('clicking on + button will show the Form modal', async () => {

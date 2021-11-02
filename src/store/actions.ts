@@ -1,5 +1,5 @@
 import  axios from 'axios';
-import { tableI } from '../components/TableFilter/TableFilter';
+import { tableI } from '../Interfaces'
 import {
     FETCH_ALL_TABLES_ERROR,
     FETCH_ALL_TABLES_REQUEST,
@@ -12,6 +12,9 @@ import {
     ADD_TABLE_SUCCESS,
     FILTER_TABLE,
     DISCARD_ERROR,
+    ADD_BOOKING_REQUEST,
+    ADD_BOOKING_SUCCESS,
+    ADD_BOOKING_ERROR,
 } from "./constants";
 
 
@@ -34,7 +37,6 @@ export const fetchAllTables = () => {
 export const filterTables = (filteredTable: tableI[]) => {
     return (dispatch: (arg0: { type: string; payload?: unknown; }) => void) =>
     dispatch({type: FILTER_TABLE, payload: filteredTable})
-
 }
 
 
@@ -64,6 +66,20 @@ export const deleteTable = (id: number) => {
            
         } catch (e) {
             dispatch({type:DELETE_TABLE_ERROR, payload: e })
+        }
+    }
+}
+
+// Booking Actions
+
+export const addBooking = (booking: any) => {
+    return async (dispatch: any) => {
+        dispatch({type: ADD_BOOKING_REQUEST})
+        try {
+            const { data } = await axios.post('http://localhost:5000/bookings', booking)
+            dispatch({type: ADD_BOOKING_SUCCESS, payload: data})
+        } catch (e) {
+            dispatch({type:ADD_BOOKING_ERROR, payload: e })
         }
     }
 }

@@ -10,6 +10,7 @@ function clickSubmitButton() {
 
 describe('TableForm', () => {
   const onClick = jest.fn();
+  const anotherClick = jest.fn();
 
   beforeEach(() => {
     onClick.mockClear();
@@ -17,9 +18,7 @@ describe('TableForm', () => {
       <App>
         <TableForm
           show={false}
-          handleClose={function (): void {
-            throw new Error('Function not implemented.');
-          }}
+          handleClose={anotherClick}
           onInputChange={undefined}
           addPost={onClick}
         />
@@ -28,19 +27,6 @@ describe('TableForm', () => {
   });
 
   test('onSubmit is called when all the fields pass validation', async () => {
-    // const { getByPlaceholderText } = render(
-    //   <App>
-    //     <TableForm
-    //       show={false}
-    //       handleClose={function (): void {
-    //         throw new Error('Function not implemented.');
-    //       }}
-    //       onInputChange={undefined}
-    //       addPost={onClick}
-    //     />
-    //   </App>
-    // );
-
     const addButton = screen.getByRole('button', {
       name: /\+/i,
     });
@@ -78,19 +64,6 @@ describe('TableForm', () => {
   });
 
   it('has 3 required fields on first step', async () => {
-    // const { getByPlaceholderText } = render(
-    //   <App>
-    //     <TableForm
-    //       show={false}
-    //       handleClose={function (): void {
-    //         throw new Error('Function not implemented.');
-    //       }}
-    //       onInputChange={undefined}
-    //       addPost={onClick}
-    //     />
-    //   </App>
-    // );
-
     const addButton = screen.getByRole('button', {
       name: /\+/i,
     });
@@ -133,5 +106,28 @@ describe('TableForm', () => {
         'Please provide a valid positive number'
       );
     });
+  });
+
+  test('the close Button is working', async () => {
+    const addButton = screen.getByRole('button', {
+      name: /\+/i,
+    });
+
+    expect(addButton).toBeInTheDocument();
+
+    fireEvent.click(addButton);
+
+    const closeButton = screen.getByRole('button', {
+      name: /close-button/i,
+    });
+
+    // WHY THIS ISN'T WORKING
+
+    // const form = screen.getByText(/add new table/i);
+    // // expect(form).not.toBeInTheDocument();
+
+    fireEvent.click(closeButton);
+
+    waitFor(() => expect(anotherClick).toHaveBeenCalled());
   });
 });

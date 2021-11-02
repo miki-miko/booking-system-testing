@@ -2,17 +2,18 @@ import { render as rtlRender } from '@testing-library/react';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 // Import your own reducer
-import tablesReducer from '../src/store/tablesReducer';
+import { rootReducer } from './store/reduxStore';
 import { ReactElement, JSXElementConstructor, ReactNode } from 'react';
-import { RootState } from './store/reduxStore';
+// import { RootState } from './store/reduxStore';
 
 interface wrapperProps {
   children?: ReactNode;
 }
 
-const defaultTestRootState: RootState = {
+const defaultTestRootState: any = {
   tables: [],
   tablesFiltered: [],
+  bookings: [],
   error: null,
   loading: false,
 };
@@ -22,7 +23,7 @@ function render(
   {
     preloadedState: RootState = defaultTestRootState,
     store = configureStore({
-      reducer: tablesReducer,
+      reducer: rootReducer,
       preloadedState: defaultTestRootState,
       middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

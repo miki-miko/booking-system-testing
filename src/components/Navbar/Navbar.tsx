@@ -1,16 +1,9 @@
-// const Navbar = () => {
-//   return (
-//     <nav className="navbar">
-//       <h2 className="navbar__logo">Restaurant Booking</h2>
-//     </nav>
-//   );
-// };
-
 import { Container, Navbar } from 'react-bootstrap';
+import './Navbar.css';
 
-const NavbarCustom = () => {
+const NavbarCustom: React.FC = () => {
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar bg="dark" variant="dark" expand="lg" className="navbar">
       <Container>
         <Navbar.Brand>Restaurant Booking</Navbar.Brand>
       </Container>
@@ -19,5 +12,3 @@ const NavbarCustom = () => {
 };
 
 export default NavbarCustom;
-
-// mylillo

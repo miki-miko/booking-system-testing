@@ -40,5 +40,6 @@
       "isAvailable": true,
       "location": "Patio"
     }
-  ]
+  ],
+  "bookings": []
 }
