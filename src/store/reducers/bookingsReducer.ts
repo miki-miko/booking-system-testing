@@ -1,3 +1,6 @@
+import {PayloadAction} from '@reduxjs/toolkit'
+
+
 import {
     ADD_BOOKING_ERROR,
     ADD_BOOKING_REQUEST,
@@ -15,7 +18,7 @@ const defaultState : any = {
 }
 
 
-const bookingsReducer = (state = defaultState, action: { type: any; payload: any; }) => {
+ const bookingsReducer: any = (state = defaultState, action: PayloadAction ) => {
 
 
     switch(action.type) {

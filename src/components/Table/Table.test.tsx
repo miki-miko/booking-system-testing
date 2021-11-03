@@ -43,11 +43,11 @@ describe('Table', () => {
       <Table
         table={{
           id: 0,
-          name: '',
-          img: '',
+          name: 'Tavolo 96',
+          img: 'https://images.pexels.com/photos/238377/pexels-photo-238377.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
           capacity: 0,
           isAvailable: false,
-          location: '',
+          location: 'Patio',
         }}
         onClick={deleteFunc}
       />

@@ -6,13 +6,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import NavbarCustom from './components/Navbar/Navbar';
 
 // Pages
-import Booking from './pages/Booking';
-import Home from './pages/Home';
+import Booking from './pages/Booking/Booking';
+import Home from './pages/Home/Home';
 
 // React
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 // Redux
 import { useDispatch } from 'react-redux';
@@ -26,19 +26,17 @@ const App: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <Router>
-      <div className="App">
-        <NavbarCustom />
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/booking">
-            <Booking />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <div className="App">
+      <NavbarCustom />
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/booking">
+          <Booking />
+        </Route>
+      </Switch>
+    </div>
   );
 };
 

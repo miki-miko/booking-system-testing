@@ -21,7 +21,7 @@ const defaultState : any = {
 }
 
 
-const tablesReducer = (state = defaultState, action: { type: any; payload: any; }) => {
+const tablesReducer: any = (state = defaultState, action: { type: any; payload: any; }) => {
 
 
     switch(action.type) {

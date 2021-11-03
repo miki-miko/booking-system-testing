@@ -6,22 +6,35 @@ import { tableI } from '../../Interfaces';
 import { RootState } from '../../store/reduxStore';
 
 const TableFilter: React.FC = () => {
-  const tables: tableI[] = useSelector(
-    (state: RootState) => state.tables.tables
-  );
+  const tables: tableI[] = useSelector((state: any) => state.tables.tables);
 
   const dispatch = useDispatch();
 
   const handleChange = (event: any) => {
     const locationFilter: string = event.target.value;
-    const capacityFilter: number = event.target.value;
+    const capacityFilter: any = event.target.value;
+
+    // console.log(typeof capacityFilter);
 
     const filteredArr = tables.filter(
       (table) => table.location === locationFilter
     );
 
-    console.log(filteredArr);
+    // console.log(filteredArr);
+    dispatch(filterTables(filteredArr));
+  };
 
+  const changeCapacity = (event: any) => {
+    // const locationFilter: string = event.target.value;
+    const capacityFilter: any = event.target.value;
+
+    // console.log(typeof capacityFilter);
+
+    const filteredArr = tables.filter(
+      (table) => table.capacity >= Number.parseInt(capacityFilter)
+    );
+
+    // console.log(filteredArr);
     dispatch(filterTables(filteredArr));
   };
 
@@ -66,7 +79,7 @@ const TableFilter: React.FC = () => {
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Select the capacity of your table</Form.Label>
         <Form.Control
-          onChange={handleChange}
+          onChange={changeCapacity}
           as="select"
           aria-label="form-select-capacity"
         >

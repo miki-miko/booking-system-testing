@@ -3,26 +3,26 @@ import './Home.css';
 import { Button, Container, Row, Col } from 'react-bootstrap';
 
 // Component
-import Table from '../components/Table/Table';
-import TableFilter from '../components/TableFilter/TableFilter';
-import TableForm from '../components/TableForm/TableForm';
+import Table from '../../components/Table/Table';
+import TableFilter from '../../components/TableFilter/TableFilter';
+import TableForm from '../../components/TableForm/TableForm';
 
 // React
 import { useEffect, useState } from 'react';
-import { newTableI, tableI } from '../Interfaces';
+import { newTableI, tableI } from '../../Interfaces';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { addTable, fetchAllTables } from '../store/actions';
-import { RootState } from '../store/reduxStore';
+import { addTable, fetchAllTables } from '../../store/actions';
+import { RootState } from '../../store/reduxStore';
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
 
-  const tables = useSelector((state: RootState) => state.tables.tables);
+  const tables = useSelector((state: any) => state.tables.tables);
 
-  const filteredTables: tableI[] = useSelector(
-    (state: RootState) => state.tables.tablesFiltered
+  const filteredTables: any = useSelector(
+    (state: any) => state.tables.tablesFiltered
   );
 
   const [showFormModal, setShowFormModal] = useState(false);

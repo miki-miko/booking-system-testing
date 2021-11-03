@@ -4,7 +4,7 @@
       "id": 1,
       "name": "Table 1",
       "img": "https://images.pexels.com/photos/1283219/pexels-photo-1283219.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-      "capacity": 5,
+      "capacity": 9,
       "isAvailable": true,
       "location": "Bar"
     },

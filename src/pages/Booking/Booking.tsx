@@ -3,9 +3,9 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { Container, Button, Col, Form, Row } from 'react-bootstrap';
-import { BookingI } from '../Interfaces';
+import { BookingI } from '../../Interfaces';
 
-import { addBooking } from '../store/actions';
+import { addBooking } from '../../store/actions';
 
 const Booking: React.FC = () => {
   const [validation, setValidation] = useState(false);

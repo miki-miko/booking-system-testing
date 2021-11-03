@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, waitFor } from '../../testUtils';
 import user from '@testing-library/user-event';
 
-import App from '../../App';
+import Home from '../../pages/Home/Home';
 import TableForm from './TableForm';
 
 function clickSubmitButton() {
@@ -15,18 +15,20 @@ describe('TableForm', () => {
   beforeEach(() => {
     onClick.mockClear();
     render(
-      <App>
+      <Home>
         <TableForm
           show={false}
           handleClose={anotherClick}
           onInputChange={undefined}
           addPost={onClick}
         />
-      </App>
+      </Home>
     );
   });
 
   test('onSubmit is called when all the fields pass validation', async () => {
+    const jsdomAlert = window.alert; // remember the jsdom alert
+    window.alert = () => {}; // provide an empty implementation for window.alert
     const addButton = screen.getByRole('button', {
       name: /\+/i,
     });
@@ -61,9 +63,13 @@ describe('TableForm', () => {
     clickSubmitButton();
 
     waitFor(() => expect(onClick).toHaveBeenCalled());
+    window.alert = jsdomAlert; // restore the jsdom alert
   });
 
   it('has 3 required fields on first step', async () => {
+    const jsdomAlert = window.alert; // remember the jsdom alert
+    window.alert = () => {}; // provide an empty implementation for window.alert
+
     const addButton = screen.getByRole('button', {
       name: /\+/i,
     });
@@ -106,9 +112,13 @@ describe('TableForm', () => {
         'Please provide a valid positive number'
       );
     });
+    window.alert = jsdomAlert; // restore the jsdom alert
   });
 
   test('the close Button is working', async () => {
+    const jsdomAlert = window.alert; // remember the jsdom alert
+    window.alert = () => {}; // provide an empty implementation for window.alert
+
     const addButton = screen.getByRole('button', {
       name: /\+/i,
     });
@@ -129,5 +139,6 @@ describe('TableForm', () => {
     fireEvent.click(closeButton);
 
     waitFor(() => expect(anotherClick).toHaveBeenCalled());
+    window.alert = jsdomAlert; // restore the jsdom alert
   });
 });
