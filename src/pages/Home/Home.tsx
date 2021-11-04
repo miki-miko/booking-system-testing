@@ -15,16 +15,17 @@ import { newTableI, tableI } from '../../Interfaces';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTable, fetchAllTables } from '../../store/actions';
 import { RootState } from '../../store/reduxStore';
+import Loader from '../../components/Loader/Loader';
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
 
-  const tables = useSelector((state: any) => state.tables.tables);
+  const tables: Array<any> = useSelector((state: any) => state.tables.tables);
 
   const filteredTables: any = useSelector(
     (state: any) => state.tables.tablesFiltered
   );
-
+  const isLoading = useSelector((state: any) => state.tables.loading);
   const [showFormModal, setShowFormModal] = useState(false);
   const [newTable, setNewTable] = useState<newTableI | null>();
 
@@ -68,14 +69,18 @@ const Home: React.FC = () => {
           <Row>
             <TableFilter />
             <Col className="flex">
-              {filteredTables.length > 0
-                ? filteredTables.map((table: any, index: any) => (
-                    <Table key={index} table={table} />
-                  ))
-                : Array.isArray(tables) &&
-                  tables.map((table: any, index: any) => (
-                    <Table key={index} table={table} />
-                  ))}
+              {isLoading ? (
+                <Loader />
+              ) : filteredTables.length > 0 ? (
+                filteredTables.map((table: any, index: any) => (
+                  <Table key={index} table={table} />
+                ))
+              ) : (
+                Array.isArray(tables) &&
+                tables.map((table: any, index: any) => (
+                  <Table key={index} table={table} />
+                ))
+              )}
             </Col>
           </Row>
         </Container>

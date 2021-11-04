@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '../../testUtils';
+import { render, screen, fireEvent, waitFor } from '../../test-utils/testUtils';
 import user from '@testing-library/user-event';
 
 import Home from '../../pages/Home/Home';
@@ -131,7 +131,7 @@ describe('TableForm', () => {
       name: /close-button/i,
     });
 
-    // WHY THIS ISN'T WORKING
+    // WHY  ISN'T THIS WORKING
 
     // const form = screen.getByText(/add new table/i);
     // // expect(form).not.toBeInTheDocument();

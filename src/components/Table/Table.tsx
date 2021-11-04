@@ -2,7 +2,6 @@ import { Button, Card } from 'react-bootstrap';
 import { useState } from 'react';
 import TableCardDetail from '../TableCardDetails/TableCardDetails';
 import { useDispatch } from 'react-redux';
-import { tableI } from '../../Interfaces';
 import { deleteTable } from '../../store/actions';
 import { Link } from 'react-router-dom';
 
@@ -17,7 +16,7 @@ const Table: React.FC<any> = ({ table }) => {
   };
 
   return (
-    <Card className={'Card'}>
+    <Card className={'Card'} data-testid="card">
       <Card.Img
         style={{ height: 150, objectFit: 'cover' }}
         variant="top"
@@ -43,7 +42,7 @@ const Table: React.FC<any> = ({ table }) => {
             Delete
           </Button>
           <Link to="/booking">
-            <Button data-testid="booking-button" variant="info">
+            <Button aria-label="book-it" variant="info">
               Book it!
             </Button>
           </Link>

@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '../../testUtils';
+import { render, screen, waitFor } from '../../test-utils/testUtils';
 import user from '@testing-library/user-event';
 
 import Booking from './Booking';
@@ -43,12 +43,4 @@ describe('Booking', () => {
 
     window.alert = jsdomAlert; // restore the jsdom alert
   });
-
-  // // test('', () => {
-  // //   // Arrange
-  // //   const jsdomAlert = window.alert; // remember the jsdom alert
-  // //   window.alert = () => {}; // provide an empty implementation for window.alert
-
-  // //   window.alert = jsdomAlert; // restore the jsdom alert
-  // // });
 });

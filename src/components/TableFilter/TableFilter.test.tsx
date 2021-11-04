@@ -1,4 +1,4 @@
-import { act, render, waitFor, within } from '../../testUtils';
+import { render, waitFor, within } from '../../test-utils/testUtils';
 import user from '@testing-library/user-event';
 
 import TableFilter from '../TableFilter/TableFilter';

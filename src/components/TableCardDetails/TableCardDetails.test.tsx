@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '../../testUtils';
+import { render, screen, fireEvent } from '../../test-utils/testUtils';
 import Table from '../Table/Table';
 import TableCardDetails from './TableCardDetails';
 

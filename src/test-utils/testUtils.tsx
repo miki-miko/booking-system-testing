@@ -7,8 +7,6 @@ import {
   RenderResult,
 } from '@testing-library/react';
 
-import { configureStore } from '@reduxjs/toolkit';
-
 import {
   createMemoryHistory,
   MemoryHistory,
@@ -22,11 +20,7 @@ import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 
 // Import your own reducer
-import { configureStoreWithMiddleware, RootState } from './store/reduxStore';
-
-// interface wrapperProps {
-//   children?: ReactNode;
-// }
+import { configureStoreWithMiddleware, RootState } from '../store/reduxStore';
 
 type CustomRenderOptions = {
   preloadedState?: any | RootState;
