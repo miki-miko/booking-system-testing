@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { Modal } from 'react-bootstrap';
 import { tableCardDetailsI } from '../../Interfaces';
 

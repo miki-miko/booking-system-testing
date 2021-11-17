@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { Button, Col, Form, Row, Modal, CloseButton } from 'react-bootstrap';
 import { useState } from 'react';
 import { TableFormProps } from '../../Interfaces';

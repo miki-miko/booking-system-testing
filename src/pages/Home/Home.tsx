@@ -1,46 +1,53 @@
+/* eslint-disable */
+
 // CSS
-import './Home.css';
-import { Button, Container, Row, Col } from 'react-bootstrap';
+import "./Home.css";
+import { Button, Container, Row, Col } from "react-bootstrap";
 
 // Component
-import Table from '../../components/Table/Table';
-import TableFilter from '../../components/TableFilter/TableFilter';
-import TableForm from '../../components/TableForm/TableForm';
+import Table from "../../components/Table/Table";
+import TableFilter from "../../components/TableFilter/TableFilter";
+import TableForm from "../../components/TableForm/TableForm";
 
 // React
-import { useEffect, useState } from 'react';
-import { newTableI, tableI } from '../../Interfaces';
+import { useEffect, useState } from "react";
+import { NewTableI, TableI } from "../../Interfaces";
 
 // Redux
-import { useDispatch, useSelector } from 'react-redux';
-import { addTable, fetchAllTables } from '../../store/actions';
-import { RootState } from '../../store/reduxStore';
-import Loader from '../../components/Loader/Loader';
+import { useDispatch, useSelector } from "react-redux";
+
+import {
+  addTable,
+  tablesSelector,
+  triggerError,
+} from "../../store/slices/tablesSlice";
+
+import Loader from "../../components/Loader/Loader";
+import ErrorBanner from "../../components/ErrorBanner/ErrorBanner";
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
 
-  const tables: Array<any> = useSelector((state: any) => state.tables.tables);
+  const tables: Array<TableI> = useSelector(tablesSelector);
+  console.log(tables);
 
   const filteredTables: any = useSelector(
     (state: any) => state.tables.tablesFiltered
   );
+
   const isLoading = useSelector((state: any) => state.tables.loading);
   const [showFormModal, setShowFormModal] = useState(false);
-  const [newTable, setNewTable] = useState<newTableI | null>();
+  const [notAvailable, setNotAvailable] = useState(false);
+  const [newTable, setNewTable] = useState<any>();
 
-  useEffect(() => {
-    dispatch(fetchAllTables());
-  }, [dispatch]);
-
-  // functions
+  // // functions
 
   const addNewTable = async (e: any) => {
     e.preventDefault();
     if (checkTableForm()) {
       dispatch(addTable(newTable));
     } else {
-      throw new Error('Form not Valid');
+      throw new Error("Form not Valid");
     }
   };
 
@@ -62,14 +69,24 @@ const Home: React.FC = () => {
     }));
   };
 
+  const renderErrorMessage = () => {
+    dispatch(triggerError());
+    setNotAvailable(true);
+  };
+
   return (
     <Container className="main">
-      <div className={'PostsContainer'}>
+      <div className={"PostsContainer"}>
         <Container className="row-container">
           <Row>
-            <TableFilter />
+            <TableFilter handleTables={renderErrorMessage} />
             <Col className="flex">
-              {isLoading ? (
+              {notAvailable ? (
+                <ErrorBanner
+                  handleErrorBanner={setNotAvailable}
+                  message={"tables not available"}
+                />
+              ) : isLoading ? (
                 <Loader />
               ) : filteredTables.length > 0 ? (
                 filteredTables.map((table: any, index: any) => (
@@ -93,9 +110,9 @@ const Home: React.FC = () => {
       />
 
       <Button
-        className={'addButton'}
-        size={'lg'}
-        variant={'primary'}
+        className={"addButton"}
+        size={"lg"}
+        variant={"primary"}
         onClick={() => setShowFormModal(true)}
       >
         +

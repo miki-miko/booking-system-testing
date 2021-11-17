@@ -5,28 +5,28 @@ import {
   render as rtlRender,
   RenderOptions,
   RenderResult,
-} from '@testing-library/react';
+} from "@testing-library/react";
 
 import {
   createMemoryHistory,
   MemoryHistory,
   MemoryHistoryBuildOptions,
-} from 'history';
+} from "history";
 
-import { ReactElement, ReactNode } from 'react';
+import { ReactElement, ReactNode } from "react";
 
-import { Provider } from 'react-redux';
+import { Provider } from "react-redux";
 
-import { Router } from 'react-router-dom';
+import { Router } from "react-router-dom";
 
 // Import your own reducer
-import { configureStoreWithMiddleware, RootState } from '../store/reduxStore';
+import { RootState, store } from "../store/reduxStore";
 
 type CustomRenderOptions = {
   preloadedState?: any | RootState;
   routeHistory?: Array<string>;
   initialRouteIndex?: number; // index in the routeHistory array to start the test
-  renderOptions?: Omit<RenderOptions, 'wrapper'>;
+  renderOptions?: Omit<RenderOptions, "wrapper">;
 };
 
 type CustomRenderResult = RenderResult & { history: MemoryHistory };
@@ -47,10 +47,9 @@ function render(
   }
   const history = createMemoryHistory({ ...memoryHistoryArgs });
   function Wrapper({ children }: { children?: ReactNode }): ReactElement {
-    const store = configureStoreWithMiddleware(preloadedState);
-
+    const renderStore: any = store;
     return (
-      <Provider store={store}>
+      <Provider store={renderStore}>
         <Router history={history}>{children}</Router>
       </Provider>
     );
@@ -62,6 +61,6 @@ function render(
 }
 
 // re-export everything
-export * from '@testing-library/react';
+export * from "@testing-library/react";
 // override render method and export history
 export { render };

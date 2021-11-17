@@ -1,48 +1,42 @@
-import { applyMiddleware, createStore, combineReducers, compose } from 'redux';
-import thunk from 'redux-thunk';
+/* eslint-disable */
 
-import tablesReducer from './reducers/tablesReducer';
-import bookingsReducer from './reducers/bookingsReducer';
-import { configureStore, EnhancedStore } from '@reduxjs/toolkit';
+import {
+  Action,
+  configureStore,
+  EnhancedStore,
+  ThunkAction,
+} from "@reduxjs/toolkit";
 
-export const defaultStore: any = {
-  tables: [],
-  tablesFiltered: [],
-  bookings: [],
-  error: null,
-  loading: false,
-};
+import tablesReducer from "./slices/tablesSlice";
+// import bookingsReducer from "./slices/bookingsReducer";
 
-export const configureStoreWithMiddleware = (
-  initialState = {}
-): EnhancedStore => {
+import { DefaultStateI, TableI } from "../Interfaces";
+
+export const configureStoreWithMiddlewares = (): EnhancedStore => {
   const store = configureStore({
     reducer: {
       tables: tablesReducer,
-      bookings: bookingsReducer,
+      // bookings: bookingsReducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({ serializableCheck: false }),
-    preloadedState: initialState,
-    devTools: process.env.NODE_ENV !== 'production',
-  });
 
+    devTools: process.env.NODE_ENV !== "production",
+  });
   return store;
 };
 
-export const rootReducer = combineReducers({
-  tables: tablesReducer,
-  bookings: bookingsReducer,
-});
+export const store = configureStoreWithMiddlewares();
 
-export type RootState = ReturnType<typeof rootReducer>;
+// // Infer the `RootState` and `AppDispatch` types from the store itself
+export type RootState = ReturnType<typeof store.getState>;
+// // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+export type AppDispatch = typeof store.dispatch;
+// // export default store;
 
-export const store = createStore(
-  rootReducer,
-  compose(
-    applyMiddleware(thunk),
-    (window as any).__REDUX_DEVTOOLS_EXTENSION__
-      ? (window as any).__REDUX_DEVTOOLS_EXTENSION__()
-      : (f: any) => f
-  )
-);
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;

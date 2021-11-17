@@ -1,15 +1,17 @@
-import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+/* eslint-disable */
 
-import { Container, Button, Col, Form, Row } from 'react-bootstrap';
-import { BookingI } from '../../Interfaces';
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
-import { addBooking } from '../../store/actions';
+import { Container, Button, Col, Form, Row } from "react-bootstrap";
+import { BookingI } from "../../Interfaces";
+
+import { addBooking } from "../../store/slices/bookingsSlice";
 
 const Booking: React.FC = () => {
   const [validation, setValidation] = useState(false);
-  const [booking, setBooking] = useState<BookingI | null>();
+  const [booking, setBooking] = useState<any>();
 
   const dispatch = useDispatch();
 
@@ -31,7 +33,7 @@ const Booking: React.FC = () => {
     if (checkBookingForm()) {
       dispatch(addBooking(booking));
     } else {
-      throw new Error('Form not Valid');
+      throw new Error("Form not Valid");
     }
   };
 
@@ -40,10 +42,11 @@ const Booking: React.FC = () => {
   const checkAndAddBooking = async (e: any) => {
     setValidation(true);
     try {
+      console.log("YO?");
       await addNewBooking(e);
       setValidation(false);
-      setBooking(null);
-      history.push('/');
+      setBooking([]);
+      history.push("/");
     } catch (e) {
       window.alert(e);
     }
@@ -51,7 +54,7 @@ const Booking: React.FC = () => {
 
   return (
     <Container className="BookingForm">
-      <Form validated={validation} style={{ width: '100%' }}>
+      <Form validated={validation} style={{ width: "100%" }}>
         <Form.Group as={Row}>
           <Col>
             <Form.Control

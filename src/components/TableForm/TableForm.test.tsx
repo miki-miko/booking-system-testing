@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { render, screen, fireEvent, waitFor } from '../../test-utils/testUtils';
 import user from '@testing-library/user-event';
 

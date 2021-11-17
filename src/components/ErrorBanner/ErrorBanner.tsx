@@ -1,35 +1,47 @@
-import './ErrorBanner.css';
+/* eslint-disable */
+import { useDispatch, useSelector } from "react-redux";
+import {
+  discardError,
+  fetchAllTables,
+  filterTables,
+} from "../../store/slices/tablesSlice";
+import Alert from "react-bootstrap/esm/Alert";
+import Button from "react-bootstrap/esm/Button";
+import { RootState } from "../../store/reduxStore";
 
-import { useDispatch } from 'react-redux';
-import { discardError, fetchAllTables } from '../../store/actions';
-
-interface Props {
+interface ErrorBannerProps {
   message: string;
+  handleErrorBanner?: (b: boolean) => void;
 }
-
-const ErrorBanner: React.FC<Props> = ({ message }) => {
-  // Redux
-
+const ErrorBanner: React.FC<ErrorBannerProps> = ({
+  message,
+  handleErrorBanner,
+}) => {
   const dispatch = useDispatch();
+  const error = useSelector((state: any) => state.tables.error);
+
+  let cleanArray: any[] = [];
+
+  const handleClose = () => {
+    dispatch(filterTables(cleanArray));
+    handleErrorBanner ? handleErrorBanner(false) : "";
+    dispatch(fetchAllTables());
+    dispatch(discardError());
+  };
 
   return (
-    <div className="ErrorBanner">
-      <span className="ErrorBanner__message">{message}</span>
-      <button
-        type="button"
-        className="ErrorBanner__retry"
-        onClick={() => dispatch(fetchAllTables())}
-      >
-        Retry
-      </button>
-      <button
-        type="button"
-        className="ErrorBanner__close"
-        onClick={() => dispatch(discardError())}
-      >
-        X
-      </button>
-    </div>
+    <>
+      {error ? (
+        <Alert variant="warning">
+          <Button variant="warning" onClick={handleClose}>
+            X
+          </Button>
+          <Alert.Heading>{message}</Alert.Heading>
+        </Alert>
+      ) : (
+        ""
+      )}
+    </>
   );
 };
 

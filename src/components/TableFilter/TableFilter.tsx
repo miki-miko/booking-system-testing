@@ -1,61 +1,79 @@
-import { Form } from 'react-bootstrap';
-import { useSelector, useDispatch } from 'react-redux';
-import { filterTables } from '../../store/actions';
-import { tableI } from '../../Interfaces';
+/* eslint-disable */
 
-import { RootState } from '../../store/reduxStore';
+import { Form } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  filterTables,
+  storeCapacity,
+  storeLocation,
+} from "../../store/slices/tablesSlice";
 
-const TableFilter: React.FC = () => {
-  const tables: tableI[] = useSelector((state: any) => state.tables.tables);
+import { TableI } from "../../Interfaces";
+import { RootState } from "../../store/reduxStore";
+import { tablesSelector } from "../../store/slices/tablesSlice";
+
+const TableFilter: React.FC<any> = ({ handleTables }) => {
+  const tables: any = useSelector((state: any) => state.tables.tables);
+
+  const filteredTables: TableI[] = useSelector(
+    (state: any) => state.tables.tablesFiltered
+  );
+
+  const prevCapacity: any = useSelector((state: any) => state.tables.capacity);
+  const prevLocation: any = useSelector((state: any) => state.tables.location);
 
   const dispatch = useDispatch();
 
-  const handleChange = (event: any) => {
-    const locationFilter: string = event.target.value;
-    const capacityFilter: any = event.target.value;
-
-    // console.log(typeof capacityFilter);
-
-    const filteredArr = tables.filter(
-      (table) => table.location === locationFilter
-    );
-
-    // console.log(filteredArr);
-    dispatch(filterTables(filteredArr));
-  };
-
-  const changeCapacity = (event: any) => {
-    // const locationFilter: string = event.target.value;
-    const capacityFilter: any = event.target.value;
-
-    // console.log(typeof capacityFilter);
-
-    const filteredArr = tables.filter(
-      (table) => table.capacity >= Number.parseInt(capacityFilter)
-    );
-
-    // console.log(filteredArr);
-    dispatch(filterTables(filteredArr));
-  };
-
-  // const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
-
-  // const memoizedCallback = useCallback(() => {
-  //   doSomething(a, b);
-  // }, [a, b]);
-
-  // const handleCapacity = (event: any) => {
-
-  //   const capacityState = tables.filter(
-  //     (table) => table.capacity >= capacityFilter
-  //   );
-  //   dispatch(filterTables(capacityState));
-  // };
-
-  const locations: string[] = tables.map((table) => table.location);
+  const locations: string[] = tables.map(
+    (table: { location: string }) => table.location
+  );
   const capacity: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   const uniqueLocations = [...new Set(locations)];
+
+  const handleChange = (event: any) => {
+    let locationFilter = event.target.value;
+
+    dispatch(storeLocation(locationFilter));
+
+    if (filteredTables && prevCapacity) {
+      const available = tables.filter(
+        (table: { location: any; capacity: number }) =>
+          table.location === locationFilter && table.capacity >= prevCapacity
+      );
+
+      available.length === 0
+        ? handleTables()
+        : dispatch(filterTables(available));
+    } else {
+      const filteredArr = tables.filter(
+        (table: { location: string }) => table.location === locationFilter
+      );
+      dispatch(filterTables(filteredArr));
+    }
+  };
+
+  const changeCapacity = (event: any) => {
+    let capacityFilter = event.target.value;
+
+    dispatch(storeCapacity(capacityFilter));
+
+    if (filteredTables && prevLocation) {
+      const available = tables.filter(
+        (table: { capacity: number; location: string }) =>
+          table.capacity >= capacityFilter && table.location === prevLocation
+      );
+
+      available.length === 0
+        ? handleTables()
+        : dispatch(filterTables(available));
+    } else {
+      const filteredArr = tables.filter(
+        (table: { capacity: number }) => table.capacity >= capacityFilter
+      );
+      dispatch(filterTables(filteredArr));
+    }
+  };
 
   return (
     <Form>
