@@ -1,15 +1,12 @@
-/* eslint-disable */
-
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { BookingI, NewTableI, TableI } from "../../Interfaces";
 import { RootState } from "../reduxStore";
+import axios, { AxiosError } from "axios";
 
 type RetrieveTables = {
   tables: TableI[];
 };
-
-import axios, { AxiosError } from "axios";
 
 export const fetchAllTables = createAsyncThunk(
   "tables/fetchAllTables",
@@ -56,6 +53,26 @@ export const deleteTable = createAsyncThunk(
     }
   }
 );
+// Selectors
+
+export const tablesSelector = (state: RootState) => {
+  return state.tables.tables;
+};
+export const filteredTablesSelector = (state: RootState) => {
+  return state.tables.tablesFiltered;
+};
+export const errorSelector = (state: RootState) => {
+  return state.tables.error;
+};
+export const capacitySelector = (state: RootState) => {
+  return state.tables.capacity;
+};
+export const locationSelector = (state: RootState) => {
+  return state.tables.location;
+};
+export const loadingSelector = (state: RootState) => {
+  return state.tables.loading;
+};
 
 const tablesSlice = createSlice({
   name: "tables",
@@ -113,10 +130,10 @@ const tablesSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(deleteTable.fulfilled, (state, action) => {
-      (state.tables = state.tables.filter(
+      state.tables = state.tables.filter(
         (table: { id: number }) => table.id !== action.payload
-      )),
-        (state.loading = false);
+      );
+      state.loading = false;
     });
     builder.addCase(deleteTable.rejected, (state) => {
       state.error = true;
@@ -132,9 +149,5 @@ export const {
   discardError,
   triggerError,
 } = tablesSlice.actions;
-
-export const tablesSelector = (state: RootState) => {
-  return state.tables.tables;
-};
 
 export default tablesSlice.reducer;

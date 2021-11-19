@@ -1,17 +1,15 @@
-/* eslint-disable */
-
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { Container, Button, Col, Form, Row } from "react-bootstrap";
-import { BookingI } from "../../Interfaces";
 
 import { addBooking } from "../../store/slices/bookingsSlice";
+import { BookingI } from "../../Interfaces";
 
 const Booking: React.FC = () => {
   const [validation, setValidation] = useState(false);
-  const [booking, setBooking] = useState<any>();
+  const [booking, setBooking] = useState<BookingI | null>();
 
   const dispatch = useDispatch();
 
@@ -21,16 +19,16 @@ const Booking: React.FC = () => {
     booking?.email &&
     Number.parseInt(booking?.phone) >= 0;
 
-  const onInputChange = (e: any) => {
-    setBooking((booking: any) => ({
-      ...booking,
+  const onInputChange = (e: { target: { name: string; value: string } }) => {
+    setBooking((booking) => ({
+      ...booking!,
       [e.target.name]: e.target.value,
     }));
   };
 
-  const addNewBooking = async (e: any) => {
+  const addNewBooking = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    if (checkBookingForm()) {
+    if (checkBookingForm() && booking) {
       dispatch(addBooking(booking));
     } else {
       throw new Error("Form not Valid");
@@ -42,10 +40,9 @@ const Booking: React.FC = () => {
   const checkAndAddBooking = async (e: any) => {
     setValidation(true);
     try {
-      console.log("YO?");
       await addNewBooking(e);
       setValidation(false);
-      setBooking([]);
+      setBooking(null);
       history.push("/");
     } catch (e) {
       window.alert(e);
@@ -126,7 +123,7 @@ const Booking: React.FC = () => {
         </Form.Group>
         <br />
         <Col>
-          <Button onClick={checkAndAddBooking} variant="primary">
+          <Button onClick={() => checkAndAddBooking} variant="primary">
             Book Now
           </Button>
         </Col>

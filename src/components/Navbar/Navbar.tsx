@@ -1,6 +1,5 @@
-/* eslint-disable */
-import { Container, Navbar } from 'react-bootstrap';
-import './Navbar.css';
+import { Container, Navbar } from "react-bootstrap";
+import "./Navbar.css";
 
 const NavbarCustom: React.FC = () => {
   return (

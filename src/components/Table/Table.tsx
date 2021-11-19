@@ -1,11 +1,10 @@
-/* eslint-disable */
-
 import { Button, Card } from "react-bootstrap";
 import { useState } from "react";
 import TableCardDetail from "../TableCardDetails/TableCardDetails";
 import { useDispatch } from "react-redux";
 import { deleteTable } from "../../store/slices/tablesSlice";
 import { Link } from "react-router-dom";
+import { TableProps } from "../../Interfaces";
 
 const Table: React.FC<any> = ({ table }) => {
   const [open, setOpen] = useState(false);
@@ -13,7 +12,6 @@ const Table: React.FC<any> = ({ table }) => {
   const dispatch = useDispatch();
 
   const deletingTable = async () => {
-    console.log("isFiring?");
     dispatch(deleteTable(table.id));
   };
 

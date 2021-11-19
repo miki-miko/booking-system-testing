@@ -1,8 +1,6 @@
-/* eslint-disable */
-
-import { Button, Col, Form, Row, Modal, CloseButton } from 'react-bootstrap';
-import { useState } from 'react';
-import { TableFormProps } from '../../Interfaces';
+import { Button, Col, Form, Row, Modal, CloseButton } from "react-bootstrap";
+import { useState } from "react";
+import { TableFormProps } from "../../Interfaces";
 
 const TableForm: React.FC<TableFormProps> = ({
   show,
@@ -31,7 +29,7 @@ const TableForm: React.FC<TableFormProps> = ({
       </Modal.Header>
       <Modal.Body>
         <div className="Form">
-          <Form validated={validate} style={{ width: '100%' }}>
+          <Form validated={validate} style={{ width: "100%" }}>
             <Form.Group as={Row}>
               <Col>
                 <Form.Control
@@ -70,7 +68,7 @@ const TableForm: React.FC<TableFormProps> = ({
               <Col>
                 <Form.Control
                   required
-                  onChange={onInputChange}
+                  onChange={() => onInputChange()}
                   aria-invalid="true"
                   aria-errormessage="table-image"
                   type="text"
@@ -103,7 +101,7 @@ const TableForm: React.FC<TableFormProps> = ({
             </Form.Group>
             <br />
             <Col>
-              <Button onClick={checkAndAddTable} variant="primary">
+              <Button onClick={() => checkAndAddTable} variant="primary">
                 Submit
               </Button>
             </Col>

@@ -16,21 +16,6 @@ export interface TableFilteredI {
   location: string;
 }
 
-export interface BookingI {
-  name: string;
-  surname: string;
-  email: string;
-  phone: string;
-}
-
-export interface DefaultStateI {
-  tables: TableI[];
-  tablesFiltered: TableFilteredI[];
-  bookings: BookingI[];
-  error: null | boolean;
-  loading: boolean;
-}
-
 export interface NewTableI {
   name: string;
   location: string;
@@ -38,7 +23,20 @@ export interface NewTableI {
   capacity: string;
 }
 
-export interface tableCardDetailsI {
+export interface BookingI {
+  name: string;
+  surname: string;
+  email: string;
+  phone: string;
+}
+
+// Component Interfaces
+
+export interface TableFilterProps {
+  handleTables: () => void;
+}
+
+export interface TableCardDetailsProps {
   show: boolean;
   handleClose: () => void;
   table: {
@@ -50,22 +48,25 @@ export interface tableCardDetailsI {
   };
 }
 
+export interface TableProps {
+  table: {
+    id: number;
+    name: string;
+    img: string;
+    capacity: number;
+    isAvailable: boolean;
+    location: string;
+  };
+}
+
 export interface TableFormProps {
   show: boolean;
   handleClose: () => void;
   onInputChange: any;
-  addPost: any;
+  addPost: (e: Event) => void;
 }
 
-export interface HomeProps {
-  show: boolean;
-  handleClose: () => void;
-  onInputChange: any;
-  addPost: any;
-}
-
-export interface BookingProps {
-  onInputChange: any;
-  addBooking: any;
-  setBooking: any;
+export interface ErrorBannerProps {
+  message: string;
+  handleErrorBanner: (b: boolean) => void;
 }

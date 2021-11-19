@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { BookingI, TableI } from "../../Interfaces";

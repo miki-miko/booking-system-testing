@@ -1,9 +1,7 @@
-/* eslint-disable */
+import { Modal } from "react-bootstrap";
+import { TableCardDetailsProps } from "../../Interfaces";
 
-import { Modal } from 'react-bootstrap';
-import { tableCardDetailsI } from '../../Interfaces';
-
-const TableCardDetails: React.FC<tableCardDetailsI> = ({
+const TableCardDetails: React.FC<TableCardDetailsProps> = ({
   show,
   handleClose,
   table,
@@ -16,10 +14,10 @@ const TableCardDetails: React.FC<tableCardDetailsI> = ({
         </Modal.Header>
         <Modal.Body
           style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'column',
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
           }}
         >
           <p>

@@ -1,26 +1,24 @@
-/* eslint-disable */
-
 import { Form } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import {
   filterTables,
   storeCapacity,
   storeLocation,
+  tablesSelector,
+  capacitySelector,
+  locationSelector,
+  filteredTablesSelector,
 } from "../../store/slices/tablesSlice";
 
-import { TableI } from "../../Interfaces";
-import { RootState } from "../../store/reduxStore";
-import { tablesSelector } from "../../store/slices/tablesSlice";
+import { TableFilterProps, TableI } from "../../Interfaces";
 
-const TableFilter: React.FC<any> = ({ handleTables }) => {
-  const tables: any = useSelector((state: any) => state.tables.tables);
+const TableFilter: React.FC<TableFilterProps> = ({ handleTables }) => {
+  const tables: TableI[] = useSelector(tablesSelector);
 
-  const filteredTables: TableI[] = useSelector(
-    (state: any) => state.tables.tablesFiltered
-  );
+  const filteredTables: TableI[] = useSelector(filteredTablesSelector);
 
-  const prevCapacity: any = useSelector((state: any) => state.tables.capacity);
-  const prevLocation: any = useSelector((state: any) => state.tables.location);
+  const prevCapacity: number = useSelector(capacitySelector);
+  const prevLocation: string = useSelector(locationSelector);
 
   const dispatch = useDispatch();
 
@@ -31,14 +29,14 @@ const TableFilter: React.FC<any> = ({ handleTables }) => {
 
   const uniqueLocations = [...new Set(locations)];
 
-  const handleChange = (event: any) => {
+  const handleChange = (event: { target: { value: any } }) => {
     let locationFilter = event.target.value;
 
     dispatch(storeLocation(locationFilter));
 
     if (filteredTables && prevCapacity) {
       const available = tables.filter(
-        (table: { location: any; capacity: number }) =>
+        (table: { location: string; capacity: number }) =>
           table.location === locationFilter && table.capacity >= prevCapacity
       );
 
@@ -53,7 +51,7 @@ const TableFilter: React.FC<any> = ({ handleTables }) => {
     }
   };
 
-  const changeCapacity = (event: any) => {
+  const changeCapacity = (event: { target: { value: any } }) => {
     let capacityFilter = event.target.value;
 
     dispatch(storeCapacity(capacityFilter));

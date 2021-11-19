@@ -1,18 +1,20 @@
-import { render, screen, waitFor } from '../../test-utils/testUtils';
-import user from '@testing-library/user-event';
+/* eslint-disable */
 
-import Booking from './Booking';
+import { render, screen, waitFor } from "../../test-utils/testUtils";
+import user from "@testing-library/user-event";
+
+import Booking from "./Booking";
 
 function clickBookItButton() {
   user.click(
-    screen.getByRole('button', {
+    screen.getByRole("button", {
       name: /book now/i,
     })
   );
 }
 
-describe('Booking', () => {
-  test('should open the Form and write inside the inputs', () => {
+describe("Booking", () => {
+  test("should open the Form and write inside the inputs", () => {
     // Arrange
     const jsdomAlert = window.alert; // remember the jsdom alert
     window.alert = () => {}; // provide an empty implementation for window.alert
@@ -21,17 +23,17 @@ describe('Booking', () => {
 
     render(<Booking />);
 
-    const firstNameInput = screen.getByPlaceholderText('Name');
-    const surnameInput = screen.getByPlaceholderText('Surname');
-    const emailInput = screen.getByPlaceholderText('Email');
-    const phoneNumberInput = screen.getByPlaceholderText('Phone Number');
+    const firstNameInput = screen.getByPlaceholderText("Name");
+    const surnameInput = screen.getByPlaceholderText("Surname");
+    const emailInput = screen.getByPlaceholderText("Email");
+    const phoneNumberInput = screen.getByPlaceholderText("Phone Number");
 
     expect(firstNameInput).toBeInTheDocument();
 
-    user.type(firstNameInput, 'Michelangelo');
-    user.type(surnameInput, 'Rossi');
-    user.type(emailInput, 'michelangelo.rossi@gmail.com');
-    user.type(phoneNumberInput, '3463939399');
+    user.type(firstNameInput, "Michelangelo");
+    user.type(surnameInput, "Rossi");
+    user.type(emailInput, "michelangelo.rossi@gmail.com");
+    user.type(phoneNumberInput, "3463939399");
 
     clickBookItButton();
 

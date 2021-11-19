@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 // CSS
 import "./Home.css";
 import { Button, Container, Row, Col } from "react-bootstrap";
@@ -10,7 +8,7 @@ import TableFilter from "../../components/TableFilter/TableFilter";
 import TableForm from "../../components/TableForm/TableForm";
 
 // React
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { NewTableI, TableI } from "../../Interfaces";
 
 // Redux
@@ -18,6 +16,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import {
   addTable,
+  filteredTablesSelector,
+  loadingSelector,
   tablesSelector,
   triggerError,
 } from "../../store/slices/tablesSlice";
@@ -28,23 +28,21 @@ import ErrorBanner from "../../components/ErrorBanner/ErrorBanner";
 const Home: React.FC = () => {
   const dispatch = useDispatch();
 
-  const tables: Array<TableI> = useSelector(tablesSelector);
-  console.log(tables);
+  const tables: TableI[] = useSelector(tablesSelector);
 
-  const filteredTables: any = useSelector(
-    (state: any) => state.tables.tablesFiltered
-  );
+  const filteredTables: TableI[] = useSelector(filteredTablesSelector);
 
-  const isLoading = useSelector((state: any) => state.tables.loading);
+  const isLoading: boolean = useSelector(loadingSelector);
+
   const [showFormModal, setShowFormModal] = useState(false);
   const [notAvailable, setNotAvailable] = useState(false);
-  const [newTable, setNewTable] = useState<any>();
+  const [newTable, setNewTable] = useState<NewTableI | null>();
 
   // // functions
 
-  const addNewTable = async (e: any) => {
+  const addNewTable = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    if (checkTableForm()) {
+    if (checkTableForm() && newTable) {
       dispatch(addTable(newTable));
     } else {
       throw new Error("Form not Valid");
@@ -62,9 +60,9 @@ const Home: React.FC = () => {
     newTable?.imageUrl &&
     Number.parseInt(newTable?.capacity) >= 0;
 
-  const onInputChange = (e: any) => {
-    setNewTable((table: any) => ({
-      ...table,
+  const onInputChange = (e: { target: { name: string; value: string } }) => {
+    setNewTable((table) => ({
+      ...table!,
       [e.target.name]: e.target.value,
     }));
   };
@@ -89,12 +87,12 @@ const Home: React.FC = () => {
               ) : isLoading ? (
                 <Loader />
               ) : filteredTables.length > 0 ? (
-                filteredTables.map((table: any, index: any) => (
+                filteredTables.map((table: TableI, index: number) => (
                   <Table key={index} table={table} />
                 ))
               ) : (
                 Array.isArray(tables) &&
-                tables.map((table: any, index: any) => (
+                tables.map((table: TableI, index: number) => (
                   <Table key={index} table={table} />
                 ))
               )}

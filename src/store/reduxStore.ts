@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import {
   Action,
   configureStore,
@@ -8,15 +6,13 @@ import {
 } from "@reduxjs/toolkit";
 
 import tablesReducer from "./slices/tablesSlice";
-// import bookingsReducer from "./slices/bookingsReducer";
-
-import { DefaultStateI, TableI } from "../Interfaces";
+import bookingsReducer from "./slices/bookingsSlice";
 
 export const configureStoreWithMiddlewares = (): EnhancedStore => {
   const store = configureStore({
     reducer: {
       tables: tablesReducer,
-      // bookings: bookingsReducer,
+      bookings: bookingsReducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({ serializableCheck: false }),
