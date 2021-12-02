@@ -33,7 +33,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!@booking-system-testing)/\" --env=jsdom",
+    "test:all": "react-scripts test --watchAll=false --coverage",
+    "test:single": "react-scripts test",
     "coverage": "react-scripts test --coverage",
     "eject": "react-scripts eject",
     "server": "json-server --watch ./mockServer/db.json --port 5000",

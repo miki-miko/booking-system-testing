@@ -101,7 +101,11 @@ const TableForm: React.FC<TableFormProps> = ({
             </Form.Group>
             <br />
             <Col>
-              <Button onClick={() => checkAndAddTable} variant="primary">
+              <Button
+                onClick={checkAndAddTable}
+                variant="primary"
+                aria-label="submit-button"
+              >
                 Submit
               </Button>
             </Col>

@@ -82,7 +82,7 @@ const tablesSlice = createSlice({
     capacity: 0,
     location: "",
     bookings: new Array<BookingI>(),
-    error: false || true,
+    error: false,
     loading: false,
   },
   reducers: {

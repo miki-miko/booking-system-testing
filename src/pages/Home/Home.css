@@ -1,43 +1,12 @@
-.App {
+.main-container {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  height: 100%;
-  position: relative;
 }
 
-.PostsContainer {
-  display: flex;
-
-  flex-wrap: wrap;
-  height: 100%;
-}
-
-.flex {
-  display: flex;
-}
-.Card {
-  width: 250px;
-  margin: 5px;
-}
-
-html,
-body,
-#app {
-  height: 100%;
-}
-
-.Form {
-  margin: 10px;
-  display: flex;
-}
-
-.addButton {
-  position: absolute;
-  left: 90%;
-  top: 100%;
-  border-radius: 50% !important;
-}
-
-.main {
-  margin-top: 25px;
+@media (min-width: 600px) {
+  .main-container {
+    flex-direction: row;
+  }
 }

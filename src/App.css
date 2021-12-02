@@ -15,9 +15,28 @@
 .flex {
   display: flex;
 }
-.Card {
+
+.card {
   width: 250px;
   margin: 5px;
+  text-align: center;
+}
+
+.card-subtitle {
+  font-size: 16px !important;
+}
+
+.card-button {
+  margin: 4px !important;
+}
+
+.card-img-container {
+  height: 200px;
+}
+
+.card-text-container {
+  margin: 3px !important;
+  padding: 0px !important;
 }
 
 html,

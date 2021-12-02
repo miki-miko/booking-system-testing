@@ -1,10 +1,10 @@
-import { rest } from 'msw';
+import { rest } from "msw";
 
-import { tables } from '../test-utils/fakedata';
-import { bookings } from '../test-utils/fakedata';
+import { tables } from "../test-utils/fakedata";
+import { bookings } from "../test-utils/fakedata";
 
-const tablesURL = 'http://localhost:5000/tables';
-const bookingsURL = 'http://localhost:5000/bookings';
+const tablesURL = "http://localhost:5000/tables";
+const bookingsURL = "http://localhost:5000/bookings";
 
 export const handlers = [
   // tables
@@ -20,6 +20,10 @@ export const handlers = [
     const { id } = parseInt(req.params);
     return res(ctx.json({ table: tables[id] }));
   }),
+
+  rest.delete(`http://localhost:5000/tables/0`, (req, res, ctx) => {
+
+    return res;
 
   // bookings
 

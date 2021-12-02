@@ -68,5 +68,4 @@ export interface TableFormProps {
 
 export interface ErrorBannerProps {
   message: string;
-  handleErrorBanner: (b: boolean) => void;
 }

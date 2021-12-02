@@ -75,7 +75,7 @@ const TableFilter: React.FC<TableFilterProps> = ({ handleTables }) => {
 
   return (
     <Form>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Group className="mb-3" controlId="tables-location">
         <Form.Label>Select a table</Form.Label>
         <Form.Control
           onChange={handleChange}
@@ -92,7 +92,7 @@ const TableFilter: React.FC<TableFilterProps> = ({ handleTables }) => {
         </Form.Control>
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Group className="mb-3" controlId="tables-capacity">
         <Form.Label>Select the capacity of your table</Form.Label>
         <Form.Control
           onChange={changeCapacity}

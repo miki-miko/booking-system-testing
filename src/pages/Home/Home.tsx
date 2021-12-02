@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import {
   addTable,
+  errorSelector,
   filteredTablesSelector,
   loadingSelector,
   tablesSelector,
@@ -31,11 +32,13 @@ const Home: React.FC = () => {
   const tables: TableI[] = useSelector(tablesSelector);
 
   const filteredTables: TableI[] = useSelector(filteredTablesSelector);
+  const error: boolean = useSelector(errorSelector);
 
   const isLoading: boolean = useSelector(loadingSelector);
 
   const [showFormModal, setShowFormModal] = useState(false);
-  const [notAvailable, setNotAvailable] = useState(false);
+  // const [notAvailable, setNotAvailable] = useState(false);
+
   const [newTable, setNewTable] = useState<NewTableI | null>();
 
   // // functions
@@ -47,11 +50,6 @@ const Home: React.FC = () => {
     } else {
       throw new Error("Form not Valid");
     }
-  };
-
-  const closeForm = () => {
-    setNewTable(null);
-    setShowFormModal(false);
   };
 
   const checkTableForm = () =>
@@ -67,39 +65,37 @@ const Home: React.FC = () => {
     }));
   };
 
+  const closeForm = () => {
+    setNewTable(null);
+    setShowFormModal(false);
+  };
+
   const renderErrorMessage = () => {
     dispatch(triggerError());
-    setNotAvailable(true);
   };
 
   return (
     <Container className="main">
-      <div className={"PostsContainer"}>
-        <Container className="row-container">
-          <Row>
-            <TableFilter handleTables={renderErrorMessage} />
-            <Col className="flex">
-              {notAvailable ? (
-                <ErrorBanner
-                  handleErrorBanner={setNotAvailable}
-                  message={"tables not available"}
-                />
-              ) : isLoading ? (
-                <Loader />
-              ) : filteredTables.length > 0 ? (
-                filteredTables.map((table: TableI, index: number) => (
-                  <Table key={index} table={table} />
-                ))
-              ) : (
-                Array.isArray(tables) &&
-                tables.map((table: TableI, index: number) => (
-                  <Table key={index} table={table} />
-                ))
-              )}
-            </Col>
-          </Row>
-        </Container>
-      </div>
+      <TableFilter handleTables={renderErrorMessage} />
+      <Row>
+        <Col className="main-container">
+          {error ? (
+            <ErrorBanner message={"tables not available"} />
+          ) : isLoading ? (
+            <Loader />
+          ) : filteredTables.length > 0 ? (
+            filteredTables.map((table: TableI, index: number) => (
+              <Table key={index} table={table} />
+            ))
+          ) : (
+            Array.isArray(tables) &&
+            tables.map((table: TableI, index: number) => (
+              <Table key={index} table={table} aria-label="card" />
+            ))
+          )}
+        </Col>
+      </Row>
+
       <TableForm
         show={showFormModal}
         handleClose={closeForm}

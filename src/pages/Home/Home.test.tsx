@@ -1,30 +1,54 @@
-import { getByText, render, screen, waitFor } from '../../test-utils/testUtils';
-import user from '@testing-library/user-event';
+/* eslint-disable */
 
-import Home from './Home';
+import { act, render, screen, waitFor } from "../../test-utils/testUtils";
+import * as actions from "../../store/slices/tablesSlice";
 
-// "name": "Table 3",
-// "capacity": 5,
+import Home from "./Home";
+import { TableI } from "../../Interfaces";
+import Table from "../../components/Table/Table";
 
-describe('Home', () => {
-  test('should display relevant Table information fetched from the server', async () => {
-    // Arrange
-    const jsdomAlert = window.alert; // remember the jsdom alert
-    window.alert = () => {}; // provide an empty implementation for window.alert
+describe("Home", () => {
+  const filteredTablesSelectorSpy = jest.spyOn(
+    actions,
+    "filteredTablesSelector"
+  );
+  const tablesSelectorSpy = jest.spyOn(actions, "tablesSelector");
+  const loadingSelectorSpy = jest.spyOn(actions, "loadingSelector");
 
-    render(<Home />);
-    const card = await screen.findByTestId('card');
-    waitFor(() => expect(card).toBeInTheDocument());
-
-    window.alert = jsdomAlert; // restore the jsdom alert
+  beforeEach(() => {
+    filteredTablesSelectorSpy.mockReset().mockReturnValue([]);
+    tablesSelectorSpy.mockReset().mockReturnValue([]);
+    loadingSelectorSpy.mockReset().mockReturnValue(false);
   });
 
-  test('should delete a Table', async () => {
-    render(<Home />, { routeHistory: ['/tables/1'] });
+  test("should display relevant Table information fetched from the server", async () => {
+    // Arrange
 
-    const tableCardName = await screen.findByText('Table 1');
+    render(<Home />);
 
-    expect(tableCardName).toBeInTheDocument();
+    const card = screen.findByLabelText("card");
+    waitFor(() => expect(card).toBeInTheDocument());
+  });
+
+  test("should delete a Table", async () => {
+    render(
+      <Table
+        table={{
+          id: 0,
+          name: "",
+          img: "",
+          capacity: 0,
+          isAvailable: false,
+          location: "",
+        }}
+      />
+    );
+
+    // tablesSelectorSpy.mockReset().mockReturnValue(actions.fetchAllTables);
+    act(() => {
+      const tableCardName = screen.getByLabelText("card-title");
+      expect(tableCardName).toBeInTheDocument();
+    });
   });
 });
 
