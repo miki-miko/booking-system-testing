@@ -37,7 +37,6 @@ const Home: React.FC = () => {
   const isLoading: boolean = useSelector(loadingSelector);
 
   const [showFormModal, setShowFormModal] = useState(false);
-  // const [notAvailable, setNotAvailable] = useState(false);
 
   const [newTable, setNewTable] = useState<NewTableI | null>();
 
@@ -95,7 +94,6 @@ const Home: React.FC = () => {
           )}
         </Col>
       </Row>
-
       <TableForm
         show={showFormModal}
         handleClose={closeForm}

@@ -21,10 +21,9 @@ export const handlers = [
     return res(ctx.json({ table: tables[id] }));
   }),
 
-  rest.delete(`http://localhost:5000/tables/0`, (req, res, ctx) => {
-
+  rest.delete(`http://localhost:5000/tables/0`, (res) => {
     return res;
-
+  }),
   // bookings
 
   rest.post(bookingsURL, (req, res, ctx) => {

@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import { act, render, screen, waitFor } from "../../test-utils/testUtils";
+import { render, screen, waitFor } from "../../test-utils/testUtils";
 import * as actions from "../../store/slices/tablesSlice";
 
 import user from "@testing-library/user-event";
@@ -21,8 +21,6 @@ describe("ErrorBanner", () => {
   });
 
   test("testing Capacity and Location Selects, should find the Table with the values selected", async () => {
-    // render(<ErrorBanner message={""} handleErrorBanner={() => {}} />);
-
     render(<ErrorBanner message={""} />);
 
     const closeButton = await screen.findByLabelText("close-button");

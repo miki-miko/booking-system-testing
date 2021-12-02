@@ -14,17 +14,6 @@ function clickBookItButton() {
 }
 
 describe("Booking", () => {
-  // test("redirect to /shows when transaction is completed", () => {
-  //   const { history } = render(<Booking />, {
-  //     preloadedState: {
-  //       user: { userDetails: { email: "test@test.com" } },
-  //       tickets: { transactionStatus:.completed },
-  //     },
-  //   });
-
-  //   expect(history.location.pathname).toBe("/shows");
-  // });
-
   test("should open the Form and write inside the inputs", () => {
     // Arrange
     const jsdomAlert = window.alert; // remember the jsdom alert

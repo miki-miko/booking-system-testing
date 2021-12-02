@@ -4,7 +4,6 @@ import { act, render, screen, waitFor } from "../../test-utils/testUtils";
 import * as actions from "../../store/slices/tablesSlice";
 
 import Home from "./Home";
-import { TableI } from "../../Interfaces";
 import Table from "../../components/Table/Table";
 
 describe("Home", () => {
@@ -44,24 +43,9 @@ describe("Home", () => {
       />
     );
 
-    // tablesSelectorSpy.mockReset().mockReturnValue(actions.fetchAllTables);
     act(() => {
       const tableCardName = screen.getByLabelText("card-title");
       expect(tableCardName).toBeInTheDocument();
     });
   });
 });
-
-// test('should display relevant Table  fetched from the server', () => {
-//   // Arrange
-//   const jsdomAlert = window.alert; // remember the jsdom alert
-//   window.alert = () => {}; // provide an empty implementation for window.alert
-
-//   render(<Home />);
-//   const button = screen.getByRole('button', {
-//     name: /\+/i,
-//   });
-//   waitFor(() => expect(button).toBeInTheDocument());
-
-//   window.alert = jsdomAlert; // restore the jsdom alert
-// });
